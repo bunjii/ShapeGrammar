@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 using JMetalCSharp.Core;
 using JMetalCSharp.Encoding.SolutionType;
-using JMetalCSharp.Encoding.Variable; 
+using JMetalCSharp.Encoding.Variable;
+using ShapeGrammar.Classes.Rules;
 
-namespace SimpleShapeGrammar.Classes
+namespace ShapeGrammar.Classes
 {
     public class SH_Variable : Variable
     {
@@ -27,7 +28,7 @@ namespace SimpleShapeGrammar.Classes
         /// </summary>
         public int Size { get; set; }
 
-        public SH_SimpleShape SimpleShape { get; set; }
+        public SG_Shape SimpleShape { get; set; }
 
         // -- constructors -- 
         public SH_Variable()

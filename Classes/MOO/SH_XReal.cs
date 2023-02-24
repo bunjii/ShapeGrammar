@@ -5,7 +5,9 @@ using System.Text;
 using JMetalCSharp.Utils.Wrapper;
 using JMetalCSharp.Core;
 
-namespace SimpleShapeGrammar.Classes
+using ShapeGrammar.Classes.Rules;
+
+namespace ShapeGrammar.Classes
 {
     public class SH_XReal : XReal
     {
@@ -42,9 +44,9 @@ namespace SimpleShapeGrammar.Classes
             return results;
         }
 
-        public SH_SimpleShape GetSimpleShape()
+        public SG_Shape GetSimpleShape()
         {
-            SH_SimpleShape ss;
+            SG_Shape ss;
             Type type = this.type.GetType();
             if (type == typeof(SH_SolutionType))
             {
@@ -68,7 +70,7 @@ namespace SimpleShapeGrammar.Classes
         public void SetRuleList(List<SH_Rule> ruleList)
         {
             Type type = this.type.GetType();
-            List<SH_Rule> results;
+            // List<SH_Rule> results;
 
             if (type == typeof(SH_SolutionType))
             {

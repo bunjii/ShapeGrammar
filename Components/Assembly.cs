@@ -2,12 +2,12 @@
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
-using SimpleShapeGrammar.Classes;
+using ShapeGrammar.Classes;
 
 using System.Linq;
-using SimpleShapeGrammar.Classes.Elements;
+using ShapeGrammar.Classes.Elements;
 
-namespace SimpleShapeGrammar.Components
+namespace ShapeGrammar.Components
 {
     // This assembly component is not yet compatibel with other geometries than lines as for the simple bridge and truss roof grammar. 
     [Serializable]
@@ -53,8 +53,8 @@ namespace SimpleShapeGrammar.Components
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             // --- variables ---
-            List<SH_Element> elems = new List<SH_Element>();
-            List<SH_Support> sups = new List<SH_Support>();
+            List<SG_Element> elems = new List<SG_Element>();
+            List<SG_Support> sups = new List<SG_Support>();
             List<SH_Load> loads = new List<SH_Load>();
             
 
@@ -72,107 +72,97 @@ namespace SimpleShapeGrammar.Components
             }
 
             // deep copy the input
-            elems = SH_UtilityClass.DeepCopy(elems); // How to get this into the form of Dictionary? Multiple input? 
-            sups = SH_UtilityClass.DeepCopy(sups);
-            loads = SH_UtilityClass.DeepCopy(loads);
-            var curves = new List<NurbsCurve>();
-            SH_SimpleShape simpleShape = new SH_SimpleShape();
+            elems = Util.DeepCopy(elems); // How to get this into the form of Dictionary? Multiple input? 
+            sups = Util.DeepCopy(sups);
+            loads = Util.DeepCopy(loads);
+
+            SG_Shape shape = new SG_Shape();
 
             // --- solve ---
-            simpleShape.NurbsCurves = curves;
-            
-            // renumbering Element Ids
-            simpleShape.elementCount = 0;
-            // renumbering Node IDs
-            simpleShape.nodeCount = 0;
-            simpleShape.supCount = 0;
 
+            // renumbering Element, Node
+            shape.elementCount = 0;
+            shape.nodeCount = 0;
 
-            
-            List<SH_Node> nodes = new List<SH_Node>();
-            List<SH_Element> numberedElems = new List<SH_Element>();
-            foreach (SH_Element e in elems)
+            List<SG_Node> nodes = new List<SG_Node>();
+            List<SG_Element> renumberedElems = new List<SG_Element>();
+            List<SG_Support> uniqueSupports = new List<SG_Support>();
+
+            foreach (SG_Element e in elems)
             {
-                e.ID = simpleShape.elementCount;
-                simpleShape.elementCount++;
-                numberedElems.Add(e);
-                //simpleShape.Elements.Add(e);
+                // element counter
+                e.ID = shape.elementCount;
+                shape.elementCount++;
+                renumberedElems.Add(e);
 
                 // node check and renumbering
-                foreach (SH_Node node in e.Nodes)
+                foreach (SG_Node nd in e.Nodes)
                 {
+                    SG_Node targetNode;
+
                     // test if there is already a node in this position
-                    if (nodes.Any(n => n.Position.DistanceToSquared(node.Position) < 0.001 ))
-                    {                        
+                    if (nodes.Any(n => n.Pt.DistanceToSquared(nd.Pt) < 0.001 ))
+                    {
+                        targetNode = nodes.Where(n => n.Pt.DistanceToSquared(nd.Pt) < 0.001).First();
+
+                        targetNode.Elements.Add(e);
                         continue;
                     }
                     
-
-                    node.ID = simpleShape.nodeCount;
-                    nodes.Add(node);
-                    simpleShape.nodeCount++;
+                    // new node case
+                    nd.ID = shape.nodeCount;
+                    nd.Elements.Add(e);
+                    nodes.Add(nd);
+                    shape.nodeCount++;
 
                 }
             }
-            simpleShape.Elements["Line"] = numberedElems;
 
-            
-            /*
             foreach (var sup in sups)
             {
-                
-
-                // there are only two supports in this grammar. Append the supports to end points of initial line
-
-
                 // find the index of the node where the support applies
-                int nodeInd = nodes.FindIndex( n => n.Position.DistanceToSquared(sup.Position) < 0.001 );
-                if (nodeInd != -1) // if -1 the location of the support don't match a node
+                SG_Node nd = nodes.FirstOrDefault( n => n.Pt.DistanceToSquared(sup.Pt) < 0.001 );
+
+                if (nd != null)
                 {
-                    sup.ID = simpleShape.supCount;
-                    simpleShape.supCount++;
-                    sup.nodeInd = nodeInd;
-                    uniqueSupports.Add(sup);
+                    sup.Node = nd;
+                    nd.Support = sup;
+                    uniqueSupports.Add(sup); 
                 }
-                
             }
-            */
+            
             // add the loads to the simple shape            
             SortLoads(loads, out List<SH_LineLoad> l_loads, out List<SH_PointLoad> p_loads);
 
-            
 
+            //// add supports to the simple shape
+            //List<SG_Support> uniqueSupports = new List<SG_Support>();
+            //foreach (SG_Node node in shape.Nodes)
+            //{
+            //    if (uniqueSupports.Any(s => s.Node.Pt.DistanceToSquared(node.Pt) < 0.001))
+            //    {
+            //        // if there is already a support at this position it is not added
+            //        continue;
+            //    }
 
+            //    // find the support at the node. 
+            //    var nodeSup = sups.Find(s => s.Node.Pt.DistanceToSquared(node.Pt) < 0.01);
+            //    nodeSup.ID = shape.supCount;
+            //    shape.supCount++;
+            //    nodeSup.Node.ID = node.ID;
 
-            simpleShape.Nodes = nodes;
+            //    uniqueSupports.Add(nodeSup);
+            //}
 
-
-            // add supports to the simple shape
-            List<SH_Support> uniqueSupports = new List<SH_Support>();
-            foreach (SH_Node node in simpleShape.Nodes)
-            {
-                if (uniqueSupports.Any(s => s.Position.DistanceToSquared(node.Position) < 0.001))
-                {
-                    // if there is already a support at this position it is not added
-                    continue;
-                }
-
-                // find the support at the node. 
-                var nodeSup = sups.Find(s => s.Position.DistanceToSquared(node.Position) < 0.01);
-                nodeSup.ID = simpleShape.supCount;
-                simpleShape.supCount++;
-                nodeSup.nodeInd = (int)node.ID;
-
-                uniqueSupports.Add(nodeSup);
-            }
-
-            simpleShape.LineLoads = l_loads;
-            simpleShape.PointLoads = p_loads;
-            simpleShape.Supports = uniqueSupports;
-            simpleShape.SimpleShapeState = State.alpha;
+            shape.Nodes = nodes;
+            shape.Elems = renumberedElems;
+            shape.LineLoads = l_loads;
+            shape.PointLoads = p_loads;
+            shape.Supports = uniqueSupports;
+            shape.SimpleShapeState = State.alpha;
 
             // --- output ---
-            DA.SetData(0, simpleShape); 
+            DA.SetData(0, shape); 
 
 
         }
@@ -211,7 +201,7 @@ namespace SimpleShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return SimpleShapeGrammar.Properties.Resources.icons_C_Mdl;
+                return ShapeGrammar.Properties.Resources.icons_C_Mdl;
             }
         }
 

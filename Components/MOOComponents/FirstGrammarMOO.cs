@@ -4,9 +4,10 @@ using Grasshopper;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Special;
-using SimpleShapeGrammar.Classes;
+using ShapeGrammar.Classes;
+using ShapeGrammar.Classes.Rules;
 
-namespace SimpleShapeGrammar.Components.MOOComponents
+namespace ShapeGrammar.Components.MOOComponents
 {
     public class FirstGrammarMOO : GH_Component
     {
@@ -35,7 +36,7 @@ namespace SimpleShapeGrammar.Components.MOOComponents
 
 
         // -- properties --
-        public SH_SimpleShape SimpleShape { get; private set;  }
+        public SG_Shape SimpleShape { get; private set;  }
         public bool mooDone = false;
         public List<List<double>> ObjectiveValues;
         public List<List<SH_Rule>> ObjectiveVariables;
@@ -89,7 +90,7 @@ namespace SimpleShapeGrammar.Components.MOOComponents
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             // --- variables ---
-            SH_SimpleShape ss = new SH_SimpleShape(); // 0
+            SG_Shape ss = new SG_Shape(); // 0
             List<SH_Rule> rulesList = new List<SH_Rule>(); // 1
             List<double> weights = new List<double>();
             bool run = false;
@@ -108,7 +109,7 @@ namespace SimpleShapeGrammar.Components.MOOComponents
             maxEvals = populationSize * generations; // total number of evaluations
 
             //Create a deep copy of the simple Shape before performing rule operations
-            SH_SimpleShape copyShape = SH_UtilityClass.DeepCopy(ss);
+            SG_Shape copyShape = Util.DeepCopy(ss);
             SimpleShape = copyShape; // assign the SH_SimpleShape instance to the component's property
 
             // Control the input

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleShapeGrammar.Classes
+namespace ShapeGrammar.Classes.Rules
 {
     [Serializable]
     public class SH_RuleA : SH_Rule
@@ -20,7 +20,7 @@ namespace SimpleShapeGrammar.Classes
             Name = "SH_RuleA";
         }
 
-        public override void NewRuleParameters(Random random, SH_SimpleShape ss)
+        public override void NewRuleParameters(Random random, SG_Shape ss)
         {
             
         }
@@ -31,7 +31,7 @@ namespace SimpleShapeGrammar.Classes
         }
 
         // --- methods ---
-        public override string RuleOperation(SH_SimpleShape _ss)
+        public override string RuleOperation(ref SG_Shape _ss)
         {
             // check if the state maches the simple shape state
             if (_ss.SimpleShapeState != RuleState)

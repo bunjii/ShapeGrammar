@@ -5,17 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using Rhino.Geometry;
-namespace SimpleShapeGrammar.Classes.Elements
+namespace ShapeGrammar.Classes.Elements
 {
     [Serializable] 
-    public abstract class SH_Element //: SH_CrossSection_Beam
+    public abstract class SG_Element //: SH_CrossSection_Beam
     {
         // --- properties ---
         
         public int? ID { get; set; }
-        public string elementName { get; set; }
+        public string Name { get; set; }
 
-        public SH_Node[] Nodes { get; set; }
+        public SG_Node[] Nodes { get; set; }
 
     }
 }

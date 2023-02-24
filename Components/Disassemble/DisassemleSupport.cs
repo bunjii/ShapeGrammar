@@ -1,9 +1,9 @@
 ﻿using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System;
-using SimpleShapeGrammar.Classes;
+using ShapeGrammar.Classes;
 
-namespace SimpleShapeGrammar.Components.Disassemble
+namespace ShapeGrammar.Components.Disassemble
 {
     public class DisassemleSupport : GH_Component
     {
@@ -22,7 +22,7 @@ namespace SimpleShapeGrammar.Components.Disassemble
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("SH_Support", "sup", "SH_Support", GH_ParamAccess.item) ;
+            pManager.AddGenericParameter("SG_Support", "SG_Sup", "SG_Support", GH_ParamAccess.item) ;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace SimpleShapeGrammar.Components.Disassemble
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddPointParameter("Position", "pos", "Point3d represenation of position", GH_ParamAccess.item);
+            pManager.AddPointParameter("Point", "pt", "Point3d represenation of position", GH_ParamAccess.item);
             pManager.AddIntegerParameter("SupportCondition", "cond", "Integerr representation of support condition", GH_ParamAccess.item);
         }
 
@@ -41,18 +41,14 @@ namespace SimpleShapeGrammar.Components.Disassemble
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             // ---variables-- -
-            SH_Support sup = new SH_Support();
+            SG_Support sup = new SG_Support();
 
             // --- input ---
             if(!DA.GetData(0, ref sup)) return;
 
             // --- solve ---
-             Point3d pt = sup.Position;
+            Point3d pt = sup.Node.Pt;
             int cond = sup.SupportCondition;
-
-            // future implementations
-            // - Node index
-            // - Support ID
 
             // --- output ---
             DA.SetData(0, pt);

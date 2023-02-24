@@ -2,10 +2,10 @@
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
-using SimpleShapeGrammar.Classes;
-using SimpleShapeGrammar.Classes.Elements;
+using ShapeGrammar.Classes;
+using ShapeGrammar.Classes.Elements;
 
-namespace SimpleShapeGrammar.Components
+namespace ShapeGrammar.Components
 {
     public class LineToElement : GH_Component
     {
@@ -45,34 +45,23 @@ namespace SimpleShapeGrammar.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+
             // --- variables ---
-            Line line = new Line();
+
+            Line ln = new Line();
             SH_CrossSection_Beam crossSection = new SH_CrossSection_Beam();
             string name = "";
 
             // --- input --- 
-            if (!DA.GetData(0, ref line)) return;
+
+            if (!DA.GetData(0, ref ln)) return;
             if (!DA.GetData(1, ref crossSection)) return;
             DA.GetData(2, ref name);
+
             // --- solve ---
 
-            // Restart the counter
-            
+            SG_Elem1D sh_Line = new SG_Elem1D(ln, null, name, crossSection);
 
-            //Initiate the Simple Shape
-            SH_SimpleShape simpleShape = new SH_SimpleShape();
-
-            // Create the SH_Node and SH_Lines. 
-            SH_Node[] nodes = new SH_Node[2];
-            nodes[0] = new SH_Node(line.From, null);
-            nodes[1] = new SH_Node(line.To, null);
-                   
-            //SH_Element sH_Element = new SH_Element(nodes, null);
-            SH_Line sh_Line = new SH_Line(nodes, null);
-            sh_Line.CrossSection = crossSection;
-            sh_Line.elementName = name;
-            
-          
             // --- output ---
             DA.SetData(0, sh_Line);
 
@@ -87,7 +76,7 @@ namespace SimpleShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return SimpleShapeGrammar.Properties.Resources.icons_C_Elem1D;
+                return ShapeGrammar.Properties.Resources.icons_C_Elem1D;
             }
         }
 

@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleShapeGrammar.Classes
+namespace ShapeGrammar.Classes.Rules
 {
     public interface ISH_Rule
     {
-        void NewRuleParameters(Random random, SH_SimpleShape simpleShape);
-
+        void NewRuleParameters(Random random, SG_Shape simpleShape);
         SH_Rule CopyRule(SH_Rule rule);
+
+        
+
     }
 }

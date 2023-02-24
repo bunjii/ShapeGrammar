@@ -8,7 +8,9 @@ using JMetalCSharp.Core;
 using JMetalCSharp.Operators.Crossover;
 using JMetalCSharp.Utils;
 
-namespace SimpleShapeGrammar.Classes
+using ShapeGrammar.Classes.Rules;
+
+namespace ShapeGrammar.Classes
 {
     class SH_Crossover : Crossover
     {
@@ -75,11 +77,11 @@ namespace SimpleShapeGrammar.Classes
             offspring[0] = new SH_Solution(problem, o1Var);
             offspring[1] = new SH_Solution(problem, o2Var);
 
-            SH_SimpleShape ss01 =
-                SH_UtilityClass.ApplyRulesToSimpleShape(o1Var[0].RuleList, parent1.sh_problem.MyComponent.SimpleShape);
+            SG_Shape ss01 =
+                Util.ApplyRulesToSimpleShape(o1Var[0].RuleList, parent1.sh_problem.MyComponent.SimpleShape);
             offspring[0].SH_Variable[0].SimpleShape = ss01;
-            SH_SimpleShape ss02 =
-                SH_UtilityClass.ApplyRulesToSimpleShape(o2Var[0].RuleList, parent2.sh_problem.MyComponent.SimpleShape.DeepCopy());
+            SG_Shape ss02 =
+                Util.ApplyRulesToSimpleShape(o2Var[0].RuleList, parent2.sh_problem.MyComponent.SimpleShape.DeepCopy());
             offspring[1].SH_Variable[0].SimpleShape = ss02;
 
             //offspring[1] = new SH_Solution(o2Var); // the constructor should take the list of SH_Rule as input
