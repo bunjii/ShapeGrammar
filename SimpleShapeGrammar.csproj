@@ -104,6 +104,8 @@
     <Compile Include="Classes\Elements\SG_Solid.cs" />
     <Compile Include="Classes\Elements\SG_Surface.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule02.cs" />
+    <Compile Include="Classes\Rules\SG_AutoRule03.cs" />
+    <Compile Include="Classes\Rules\SG_AutoRule04.cs" />
     <Compile Include="Classes\SG_Genotype.cs" />
     <Compile Include="Classes\KarambaUtility.cs" />
     <Compile Include="Classes\MOO\MOOComponentAttributes.cs" />
@@ -131,7 +133,7 @@
     <Compile Include="Classes\Loads\SH_LineLoad.cs" />
     <Compile Include="Classes\SG_Node.cs" />
     <Compile Include="Classes\CrossSections\SH_CrossSection_Rectangle.cs" />
-    <Compile Include="Classes\Rules\SH_Rule.cs" />
+    <Compile Include="Classes\Rules\SG_Rule.cs" />
     <Compile Include="Classes\Rules\SH_Rule01.cs" />
     <Compile Include="Classes\Rules\SH_Rule02.cs" />
     <Compile Include="Classes\Rules\SH_RuleA.cs" />
@@ -143,9 +145,10 @@
     <Compile Include="Components\CreateGenotype.cs" />
     <Compile Include="Components\CreateIsotropicMaterial.cs" />
     <Compile Include="Components\CrossSections\RectangleCrossSection.cs" />
+    <Compile Include="Components\Disassemble\DisassembleElement.cs" />
     <Compile Include="Components\Disassemble\DisassembleNode.cs" />
-    <Compile Include="Components\Disassemble\DisassembleSimpleShape.cs" />
-    <Compile Include="Components\Disassemble\DisassemleSupport.cs" />
+    <Compile Include="Components\Disassemble\DisassembleShape.cs" />
+    <Compile Include="Components\Disassemble\DisassembleSupport.cs" />
     <Compile Include="Components\Evaluate.cs" />
     <Compile Include="Components\GrammarInterpreter_Auto.cs" />
     <Compile Include="Components\KarambaComponents\KarambaTest.cs" />
@@ -157,6 +160,8 @@
     <Compile Include="Components\MOOComponents\FirstGrammarMOO.cs" />
     <Compile Include="Components\MOOComponents\TestUpdateReset.cs" />
     <Compile Include="Components\RuleComponents\AutoRule01.cs" />
+    <Compile Include="Components\RuleComponents\AutoRule02.cs" />
+    <Compile Include="Components\RuleComponents\AutoRule03.cs" />
     <Compile Include="Components\RuleComponents\RandomTest.cs" />
     <Compile Include="Components\RuleComponents\RandomRules.cs" />
     <Compile Include="Components\RuleComponents\Rule01.cs" />

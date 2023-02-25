@@ -76,13 +76,14 @@ namespace ShapeGrammar.Components
             sups = Util.DeepCopy(sups);
             loads = Util.DeepCopy(loads);
 
-            SG_Shape shape = new SG_Shape();
 
             // --- solve ---
 
-            // renumbering Element, Node
-            shape.elementCount = 0;
-            shape.nodeCount = 0;
+            SG_Shape shape = new SG_Shape
+            {
+                elementCount = 0,
+                nodeCount = 0
+            };
 
             List<SG_Node> nodes = new List<SG_Node>();
             List<SG_Element> renumberedElems = new List<SG_Element>();
@@ -109,12 +110,11 @@ namespace ShapeGrammar.Components
                         continue;
                     }
                     
-                    // new node case
+                    // in case it is a new node
                     nd.ID = shape.nodeCount;
                     nd.Elements.Add(e);
                     nodes.Add(nd);
                     shape.nodeCount++;
-
                 }
             }
 
@@ -134,26 +134,6 @@ namespace ShapeGrammar.Components
             // add the loads to the simple shape            
             SortLoads(loads, out List<SH_LineLoad> l_loads, out List<SH_PointLoad> p_loads);
 
-
-            //// add supports to the simple shape
-            //List<SG_Support> uniqueSupports = new List<SG_Support>();
-            //foreach (SG_Node node in shape.Nodes)
-            //{
-            //    if (uniqueSupports.Any(s => s.Node.Pt.DistanceToSquared(node.Pt) < 0.001))
-            //    {
-            //        // if there is already a support at this position it is not added
-            //        continue;
-            //    }
-
-            //    // find the support at the node. 
-            //    var nodeSup = sups.Find(s => s.Node.Pt.DistanceToSquared(node.Pt) < 0.01);
-            //    nodeSup.ID = shape.supCount;
-            //    shape.supCount++;
-            //    nodeSup.Node.ID = node.ID;
-
-            //    uniqueSupports.Add(nodeSup);
-            //}
-
             shape.Nodes = nodes;
             shape.Elems = renumberedElems;
             shape.LineLoads = l_loads;
@@ -169,6 +149,9 @@ namespace ShapeGrammar.Components
         /// <summary>
         /// Private methods for this components
         /// </summary>
+        /// 
+
+
         private void SortLoads(List<SH_Load> loads ,out List<SH_LineLoad> line_loads, out List<SH_PointLoad> point_loads)
         {
             // create the empty list
@@ -178,13 +161,13 @@ namespace ShapeGrammar.Components
             // iterate through all the loads
             foreach (var l in loads)
             {
-                if (l is SH_LineLoad)
+                if (l is SH_LineLoad load)
                 {
-                    ll.Add( (SH_LineLoad) l);
+                    ll.Add( load);
                 }
-                if (l is SH_PointLoad)
+                if (l is SH_PointLoad ptload)
                 {
-                    pl.Add( (SH_PointLoad) l);
+                    pl.Add( ptload);
                 }
             }
             line_loads = ll;

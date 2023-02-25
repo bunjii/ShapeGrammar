@@ -14,7 +14,7 @@ namespace ShapeGrammar.Components.Disassemble
         /// </summary>
         public DisassembleNode()
           : base("DisassembleNode", "Exp. Node",
-              "Description",
+              "",
               Util.CAT, Util.GR_UTIL)
         {
         }
