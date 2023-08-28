@@ -229,6 +229,7 @@
   <PropertyGroup>
     <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
 Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\7.0\Karamba3D\2.2.0.171\$(ProjectName).gha"
+Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\7.0\Karamba3D\2.2.0.171\$(ProjectName).dll"
 
 Erase "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
