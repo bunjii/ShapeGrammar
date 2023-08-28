@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Grasshopper.Kernel;
+using Rhino;
 using Rhino.Geometry;
 using Rhino.Geometry.Intersect;
 
@@ -56,106 +57,16 @@ namespace ShapeGrammar.Classes.Rules
             selectedIntGenes = gt.IntGenes.GetRange(sid, eid - sid);
             selectedDGenes = gt.DGenes.GetRange(sid, eid - sid);
 
-
-            // this below should be revised. 
-            if (selectedIntGenes[0] == 0) return "Auto-rule 04 not applied.";
-
             // rule 4 content
 
-            var r1_elems = ss_ref.Elems.Where(e => e.Autorule == 1).ToList();
-            var r2_elems = ss_ref.Elems.Where(e => e.Autorule == 2).ToList();
-            var r3_elems = ss_ref.Elems.Where(e => e.Autorule == 3).ToList();
+            var r2_elms = ss_ref.Elems.Where(e => e.Name == "AR2").ToList();
 
-            List<int> removeIds = new List<int>();
-            foreach (var r2 in r2_elems)
-            {
-                foreach (var r3 in r3_elems)
-                {
-                    var intersect = Intersection.CurveLine(
-                        (r3 as SG_Elem1D).Ln.ToNurbsCurve(), (r2 as SG_Elem1D).Ln, UT.PRES, UT.PRES);
+            var r2_elms_upp = r2_elms.Where(e => e.Nodes[1].Pt.Z - e.Nodes[0].Pt.Z > 0).OrderBy(e => e.Nodes[0].Pt.X).ToList();
+            var r2_elms_low = r2_elms.Where(e => e.Nodes[1].Pt.Z - e.Nodes[0].Pt.Z < 0).OrderBy(e => e.Nodes[0].Pt.X).ToList();
 
-                    if (intersect.Count == 0) continue;
-
-                    if (intersect[0].PointA.DistanceToSquared(r2.Nodes[0].Pt) < UT.PRES) continue;
-                    else if (intersect[0].PointA.DistanceToSquared(r2.Nodes[1].Pt) < UT.PRES) continue;
-
-                    else
-                    {
-                        Intersection.LineLine((r3 as SG_Elem1D).Ln, (r2 as SG_Elem1D).Ln, out double param, out _);
-
-                        // add intermediate node
-                        SG_Node midNode = SG_Node.CreateNode(r3, param, ss_ref.nodeCount);
-                        ss_ref.Nodes.Add(midNode);
-                        ss_ref.nodeCount++;
-
-                        // create 3x Element
-                        SG_Elem1D newLn0 = new SG_Elem1D(new SG_Node[] { r3.Nodes[0], midNode }, ss_ref.elementCount, r3.Name) { Autorule = 4 };
-                        SG_Elem1D newLn1 = new SG_Elem1D(new SG_Node[] { midNode, r3.Nodes[1] }, ss_ref.elementCount + 1, r3.Name) { Autorule = 4 };
-                        SG_Elem1D newLn2 = new SG_Elem1D(new SG_Node[] { r2.Nodes[1], midNode }, ss_ref.elementCount + 2, r2.Name) { Autorule = 4 };
-
-                        ss_ref.elementCount += 3;
-
-                        // remove Element just split
-                        removeIds.Add(r3.ID);
-                        ss_ref.Elems.AddRange(new List<SG_Element>(3) { newLn0, newLn1, newLn2 });
-
-                        // remove B1 
-                        //// functioning code below but need to be cleaned up later: 230226
-                        //var selr1elems0 = r1_elems.Where(r1 =>
-                        //0.5 * ((r1 as SG_Elem1D).Ln.FromX + (r1 as SG_Elem1D).Ln.ToX) > Math.Min(newLn0.Ln.FromX, newLn0.Ln.ToX) &&
-                        //0.5 * ((r1 as SG_Elem1D).Ln.FromX + (r1 as SG_Elem1D).Ln.ToX) < Math.Max(newLn0.Ln.FromX, newLn0.Ln.ToX));
-                        //foreach (SG_Element e in selr1elems0)
-                        //{
-                        //    ss_ref.Elems.Remove(e);
-                        //}
-
-                        // remove AR2
-                        ss_ref.Elems.Remove(r2);
-
-                        //var selr1elems1 = r1_elems.Where(r1 =>
-                        //0.5 * ((r1 as SG_Elem1D).Ln.FromX + (r1 as SG_Elem1D).Ln.ToX) > Math.Min(newLn1.Ln.FromX, newLn1.Ln.ToX) &&
-                        //0.5 * ((r1 as SG_Elem1D).Ln.FromX + (r1 as SG_Elem1D).Ln.ToX) < Math.Max(newLn1.Ln.FromX, newLn1.Ln.ToX));
-                        //foreach (SG_Element e in selr1elems1)
-                        //{
-                        //    ss_ref.Elems.Remove(e);
-                        //}
-
-                    }
-                }
-            }
-
-            ss_ref.Elems = ss_ref.Elems.Where(e => removeIds.Contains(e.ID) == false).ToList();
-
-            // add diagonal
-
-            r2_elems = ss_ref.Elems.Where(e => e.Autorule == 2).OrderBy(e => e.Nodes[0].Pt.X).ToList();
-
-            for (int i = 0; i < r2_elems.Count-1; i++)
-            {
-                var e0n0 = r2_elems[i].Nodes[0];
-                var e0n1 = r2_elems[i].Nodes[1];
-                var e1n0 = r2_elems[i+1].Nodes[0];
-                var e1n1 = r2_elems[i+1].Nodes[1];
-
-                if (e0n0.Pt.Z < e0n1.Pt.Z)
-                {
-                    e0n0 = r2_elems[i].Nodes[1];
-                    e0n1 = r2_elems[i].Nodes[0];
-                }
-
-                if (e1n0.Pt.Z < e1n1.Pt.Z)
-                {
-                    e1n0 = r2_elems[i + 1].Nodes[1];
-                    e1n1 = r2_elems[i + 1].Nodes[0];
-                }
-
-                // create 2x Element
-                SG_Elem1D newLn0 = new SG_Elem1D(new SG_Node[] { e0n0, e1n1 }, ss_ref.elementCount, "dg") { Autorule = 4 };
-                SG_Elem1D newLn1 = new SG_Elem1D(new SG_Node[] { e0n1, e1n0 }, ss_ref.elementCount + 1, "dg") { Autorule = 4 };
-                ss_ref.elementCount += 2;
-
-                ss_ref.Elems.AddRange(new List<SG_Element>(2) { newLn0, newLn1});
-            }
+            int gene_cnt = 0;
+            CreatesDiagonals(ref ss_ref, selectedIntGenes, r2_elms_upp, ref gene_cnt);
+            CreatesDiagonals(ref ss_ref, selectedIntGenes, r2_elms_low, ref gene_cnt);
 
             // remove unused nodes
             ss_ref.UnregisterElemsFromNodes();
@@ -168,5 +79,53 @@ namespace ShapeGrammar.Classes.Rules
         {
             throw new NotImplementedException();
         }
+
+        internal void CreatesDiagonals(ref SG_Shape ss_ref, List<int> _IntGenes, List<SG_Element> _r2_elms, ref int cnt)
+        {
+            for (var i = 0; i < _r2_elms.Count() - 1; i++)
+            {
+                // terminates if gene count is not sufficient
+                if (cnt >= _IntGenes.Count()) break;
+                // moves on if the corresponding gene value is zero
+                if (_IntGenes[cnt] == 0) 
+                {
+                    cnt++;
+                    continue; 
+                }
+
+                // relevant r2 elms to create diagonals
+                var current_r2e = _r2_elms[i];
+                var next_r2e = _r2_elms[i + 1];
+
+                // check whether any supports exist between the two r2 elems. Support can contain a r2 elem on the opposite
+                // side, and thus s.Node.Elements.Where(e => e.Autorule == 2).Count() <= 1
+                var supNds_inbtw = ss_ref.Supports
+                    .Where(s => s.Pt.X > current_r2e.Nodes[0].Pt.X 
+                             && s.Pt.X < next_r2e.Nodes[0].Pt.X)
+                    .Where(s => s.Node.Elements.Where(e => e.Name == "AR2").Count() <= 1);
+
+                // don't create diagonals and continue if there are such supports
+                if (supNds_inbtw.Count() != 0) 
+                {
+                    continue;
+                }
+
+                // otherwise, creates diagonals
+                var e0n0 = _r2_elms[i].Nodes[0];
+                var e0n1 = _r2_elms[i].Nodes[1];
+                var e1n0 = _r2_elms[i + 1].Nodes[0];
+                var e1n1 = _r2_elms[i + 1].Nodes[1];
+
+                // create 2x Elements
+                SG_Elem1D newLn0 = new SG_Elem1D(new SG_Node[] { e0n0, e1n1 }, ss_ref.elementCount, "dg") { Autorule = 4 };
+                SG_Elem1D newLn1 = new SG_Elem1D(new SG_Node[] { e0n1, e1n0 }, ss_ref.elementCount + 1, "dg") { Autorule = 4 };
+                ss_ref.elementCount += 2;
+
+                ss_ref.Elems.AddRange(new List<SG_Element>(2) { newLn0, newLn1 });
+                cnt++;
+            }
+
+        }
+
     }
 }

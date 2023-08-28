@@ -11,7 +11,7 @@ namespace ShapeGrammar.Classes.Rules
         // --- properties ---
         public double HorizontalThrustParameter { get; set; }
         public bool Compression { get; set; }
-        private double[] bounds = {0.1, 0.9};
+        private readonly double[] bounds = {0.1, 0.9};
         //public State RuleState = State.gamma;
 
         // --- constructors ---
@@ -58,11 +58,10 @@ namespace ShapeGrammar.Classes.Rules
             double[] reactions = SH_Evaluation.CalculateReactions(_ss, forces, thrust);
 
             // draw reciprocal diagram
-            Dictionary<string, List<Line>> reciprocal_diagram = new Dictionary<string, List<Line>>();
+            Dictionary<string, List<Line>> reciprocal_diagram; // = new Dictionary<string, List<Line>>();
             try
             {
                 reciprocal_diagram = SH_Evaluation.DrawReciprocal(_ss, reactions, forces, thrust);
-                
                 
             }
             catch // (Exception ex)
@@ -70,7 +69,6 @@ namespace ShapeGrammar.Classes.Rules
                 throw new Exception("The number of elements are not sufficient to create the funicular. There must be at least two lines.");
                 //AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Not enough elements to draw reciprocal. Minimum number is 2.");
             }
-
 
             // change state til "end" 
             _ss.SimpleShapeState = State.end;
