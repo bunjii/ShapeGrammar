@@ -56,9 +56,11 @@ namespace ShapeGrammar.Components
             DA.GetData(1, ref lc);
             if (!DA.GetData(2, ref lVec)) return;
             // --- solve ---
-            SH_LineLoad ll = new SH_LineLoad(lc, lVec);
-            ll.ElementId = elementID;
-            
+            SH_LineLoad ll = new SH_LineLoad(lc, lVec)
+            {
+                ElementId = elementID
+            };
+
 
             // --- output ---
             DA.SetData(0, ll);

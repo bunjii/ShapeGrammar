@@ -54,15 +54,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accord, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>packages\Accord.3.8.0\lib\net462\Accord.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>packages\Accord.Math.3.8.0\lib\net462\Accord.Math.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math.Core, Version=3.8.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>packages\Accord.Math.3.8.0\lib\net462\Accord.Math.Core.dll</HintPath>
-    </Reference>
     <Reference Include="GH_IO">
       <HintPath>..\_ref\ShapeGrammar\GH_IO.dll</HintPath>
       <Private>False</Private>
@@ -71,18 +62,11 @@
       <HintPath>..\_ref\ShapeGrammar\Grasshopper.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="JMetalCSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\JMetalCSharp.dll</HintPath>
-    </Reference>
     <Reference Include="karamba.gha">
       <HintPath>..\_ref\ShapeGrammar\karamba.gha.dll</HintPath>
     </Reference>
     <Reference Include="karambaCommon">
       <HintPath>..\_ref\ShapeGrammar\KarambaCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.14.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>packages\log4net.2.0.14\lib\net45\log4net.dll</HintPath>
     </Reference>
     <Reference Include="RhinoCommon">
       <HintPath>..\_ref\ShapeGrammar\RhinoCommon.dll</HintPath>
@@ -108,23 +92,8 @@
     <Compile Include="Classes\Rules\SG_AutoRule04.cs" />
     <Compile Include="Classes\SG_Genotype.cs" />
     <Compile Include="Classes\KarambaUtility.cs" />
-    <Compile Include="Classes\MOO\MOOComponentAttributes.cs" />
-    <Compile Include="Classes\MOO\MOO_Utility.cs" />
-    <Compile Include="Classes\MOO\SH_Crossover.cs" />
-    <Compile Include="Classes\MOO\SH_CrossoverFactory.cs" />
-    <Compile Include="Classes\MOO\SH_Mutation.cs" />
-    <Compile Include="Classes\MOO\SH_MutationFactory.cs" />
-    <Compile Include="Classes\MOO\SH_NSGAII.cs" />
-    <Compile Include="Classes\MOO\SH_NSGAIIProblem.cs" />
-    <Compile Include="Classes\MOO\ObjectiveComparer.cs" />
-    <Compile Include="Classes\MOO\SH_NSGAIIRunner.cs" />
-    <Compile Include="Classes\MOO\SH_Solution.cs" />
-    <Compile Include="Classes\MOO\SH_SolutionType.cs" />
-    <Compile Include="Classes\MOO\SH_Variable.cs" />
-    <Compile Include="Classes\MOO\SH_XReal.cs" />
     <Compile Include="Classes\Rules\ISH_Rule.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule01.cs" />
-    <Compile Include="Classes\SH_Evaluation.cs" />
     <Compile Include="Classes\Material\SH_Material.cs" />
     <Compile Include="Classes\Elements\SG_Element.cs" />
     <Compile Include="Classes\Loads\SH_Load.cs" />
@@ -151,27 +120,20 @@
     <Compile Include="Components\Disassemble\DisassembleNode.cs" />
     <Compile Include="Components\Disassemble\DisassembleShape.cs" />
     <Compile Include="Components\Disassemble\DisassembleSupport.cs" />
-    <Compile Include="Components\Evaluate.cs" />
     <Compile Include="Components\GrammarInterpreter_Auto.cs" />
-    <Compile Include="Components\KarambaComponents\KarambaTest.cs" />
     <Compile Include="Components\Load Components\LineLoad.cs" />
     <Compile Include="Components\LineToElement.cs" />
     <Compile Include="Components\CreateGeometry.cs" />
     <Compile Include="Components\GrammarInterpreter.cs" />
     <Compile Include="Components\Load Components\PointLoads.cs" />
-    <Compile Include="Components\MOOComponents\FirstGrammarMOO.cs" />
-    <Compile Include="Components\MOOComponents\TestUpdateReset.cs" />
     <Compile Include="Components\RuleComponents\AutoRule01.cs" />
     <Compile Include="Components\RuleComponents\AutoRule02.cs" />
     <Compile Include="Components\RuleComponents\AutoRule03.cs" />
     <Compile Include="Components\RuleComponents\AutoRule04.cs" />
-    <Compile Include="Components\RuleComponents\RandomTest.cs" />
-    <Compile Include="Components\RuleComponents\RandomRules.cs" />
     <Compile Include="Components\RuleComponents\Rule01.cs" />
     <Compile Include="Components\RuleComponents\Rule02.cs" />
     <Compile Include="Components\RuleComponents\Rule03.cs" />
     <Compile Include="Components\RuleComponents\RuleA.cs" />
-    <Compile Include="Components\KarambaComponents\SH_ShapeToKarambaModel.cs" />
     <Compile Include="Components\SupportComponent.cs" />
     <Compile Include="Components\TcpReceive.cs" />
     <Compile Include="Components\TcpSend.cs" />
