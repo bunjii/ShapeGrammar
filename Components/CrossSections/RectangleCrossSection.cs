@@ -15,7 +15,7 @@ namespace ShapeGrammar.Components
         public RectangleCrossSection()
           : base("RectangularCrossSection", "rec_crossec",
               "Define the CrossSection",
-              "SimpleGrammar", "CrossSection")
+              UT.CAT, UT.GR_SEC)
         {
         }
 
