@@ -63,79 +63,9 @@ namespace ShapeGrammar.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons_C_Elem1D {
-            get {
-                object obj = ResourceManager.GetObject("icons_C_Elem1D", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons_C_ElemHinge {
-            get {
-                object obj = ResourceManager.GetObject("icons_C_ElemHinge", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons_C_Load_P {
-            get {
-                object obj = ResourceManager.GetObject("icons_C_Load_P", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons_C_Mdl {
-            get {
-                object obj = ResourceManager.GetObject("icons_C_Mdl", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons_C_Sol_LS {
-            get {
-                object obj = ResourceManager.GetObject("icons_C_Sol_LS", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons_C_Sup {
-            get {
-                object obj = ResourceManager.GetObject("icons_C_Sup", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icons_Generic {
             get {
                 object obj = ResourceManager.GetObject("icons_Generic", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons_I_DrawCS {
-            get {
-                object obj = ResourceManager.GetObject("icons_I_DrawCS", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

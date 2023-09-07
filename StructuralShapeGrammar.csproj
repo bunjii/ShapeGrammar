@@ -152,32 +152,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="log4net.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Resources\icons_C_Sup.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons_C_Mdl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons_C_ElemHinge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons_C_Sol_LS.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons_C_Elem1D.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons_C_Load_P.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons_I_DrawCS.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Misc\SimpleShapeGrammar.drawio.png" />
     <Content Include="Misc\SimpleShapeGrammar.drawio.xml" />
     <None Include="Resources\icons_Generic.png" />
