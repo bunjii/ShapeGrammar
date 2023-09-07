@@ -14,7 +14,7 @@ namespace ShapeGrammar.Components
         public RandomRules()
           : base("RandomRules", "random",
               "Generate a list of random rules from the input rules",
-              "SimpleGrammar", "Rules")
+              UT.CAT, UT.GR_RLS)
         {
         }
 

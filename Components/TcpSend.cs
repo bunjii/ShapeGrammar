@@ -2,19 +2,26 @@
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+
+using System.Threading.Tasks;
+
+using Rhino;
 using ShapeGrammar.Classes;
-using ShapeGrammar.Classes.Elements;
 
 namespace ShapeGrammar.Components
 {
-    public class DisassembleShape : GH_Component
+    public class TcpSend : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the DisassembleSimpleShape class.
+        /// Initializes a new instance of the tcp_ip_send class.
         /// </summary>
-        public DisassembleShape()
-          : base("DisassembleShape", "Exp. Shape",
-              "",
+        public TcpSend()
+          : base("Tcp IP Send", "TcpipSend",
+              "Description",
               UT.CAT, UT.GR_UTIL)
         {
         }
@@ -24,7 +31,9 @@ namespace ShapeGrammar.Components
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("SH_SimpleShape", "sShape", "The instance of a SH_SimpleShape to disassemble", GH_ParamAccess.item); // 0
+            pManager.AddTextParameter("IP Address", "ip address", "", GH_ParamAccess.item);
+            pManager.AddIntegerParameter("Port", "port", "", GH_ParamAccess.item);
+            pManager.AddTextParameter("Data", "data", "", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -32,14 +41,7 @@ namespace ShapeGrammar.Components
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddGenericParameter("SH_Elements", "elems", "SH_Elements", GH_ParamAccess.list); // 0
-            pManager.AddGenericParameter("SH_Supports", "sups", "SH_Supports", GH_ParamAccess.list); // 1
-            pManager.AddGenericParameter("SH_Nodes", "nodes", "SH_Node", GH_ParamAccess.list); // 2
 
-            // future implementations
-
-            
-            //pManager.AddGenericParameter("SH_Loads", "loads", "SH_Loads", GH_ParamAccess.list); // 0
         }
 
         /// <summary>
@@ -49,31 +51,35 @@ namespace ShapeGrammar.Components
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             // --- variables ---
-            SG_Shape ss = new SG_Shape();
+            string ip = "";
+            int port = new int();
+            string txtdata = "";
 
             // --- input ---
-            if (!DA.GetData(0, ref ss)) return;
+            DA.GetData(0, ref ip);
+            DA.GetData(1, ref port);
+            DA.GetData(2, ref txtdata);
 
             // --- solve ---
 
-            // list of elements
-            List<SG_Element> elems = new List<SG_Element>();
-            elems.AddRange(ss.Elems);
+            try
+            {
+                TcpClient client = new TcpClient(ip, port);
+                NetworkStream stream = client.GetStream();
 
-            // list of supports
-            List<SG_Support> sups = new List<SG_Support>();
-            sups.AddRange(ss.Supports);
+                // send message
+                byte[] initialData = Encoding.ASCII.GetBytes(txtdata);
+                stream.Write(initialData, 0, initialData.Length);
 
-            // list of nodes
-            List<SG_Node> nodes = new List<SG_Node>();
-            nodes.AddRange(ss.Nodes);
+                stream.Close();
+                client.Close();
+            }
+            catch (Exception ex)
+            {
+                RhinoApp.WriteLine("Error: " + ex.Message);
+            }
 
             // --- output ---
-            DA.SetDataList(0, elems);
-            DA.SetDataList(1, sups);
-            DA.SetDataList(2, nodes);
-
-
 
         }
 
@@ -95,7 +101,7 @@ namespace ShapeGrammar.Components
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("86c43654-6fb9-4c5f-873f-7422e06a9d38"); }
+            get { return new Guid("48b2d6f6-0d03-492a-b0a4-8493821daedb"); }
         }
     }
 }

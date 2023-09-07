@@ -38,7 +38,7 @@ namespace ShapeGrammar.Classes
 
     // --- methods ---
 
-    public static class UT
+    public class UT
     {
         public static double PRES = 0.001;
 
@@ -50,10 +50,18 @@ namespace ShapeGrammar.Classes
         public static int RULE02_MARKER = -2;
         public static int RULE04_MARKER = -4;
 
-        public static string CAT = "SimpleGrammar";
-        public static string GR_RLS = "04. Rules";
-        public static string GR_INT = "07. Interpreter";
-        public static string GR_UTIL = "99. Utilities";
+        public static string CAT = "StructuralGrammar";
+        public static string GR_MAT = "01. Material";
+        public static string GR_SEC = "02. Section";
+        public static string GR_ELM = "03. Element";
+        public static string GR_SUP = "04. Support";
+        public static string GR_LD = "05. Load";
+        public static string GR_ASSEM = "06. Assembly";
+        public static string GR_RLS = "07. Rules";
+        public static string GR_INT = "08. Interpreter";
+        public static string GR_UTIL = "89. Utilities";
+        public static string GR_MISC = "99. Misc";
+
 
         public static T DeepCopy<T>(T target)
         {

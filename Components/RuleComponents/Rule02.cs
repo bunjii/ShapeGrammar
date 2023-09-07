@@ -15,7 +15,7 @@ namespace ShapeGrammar.Components
         public Rule02()
           : base("Rule02", "rule2",
               "Rule 2 which splits a line at its given parameter",
-              "SimpleGrammar", "Rules")
+              UT.CAT, UT.GR_RLS)
         {
         }
 
@@ -66,7 +66,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.icons_Generic;
             }
         }
 

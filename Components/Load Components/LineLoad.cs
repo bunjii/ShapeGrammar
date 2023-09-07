@@ -14,7 +14,7 @@ namespace ShapeGrammar.Components
         public LineLoad()
           : base("LineLoad", "l_load",
               "Line load on element",
-              "SimpleGrammar", "Loads")
+              UT.CAT, UT.GR_LD)
         {
         }
 

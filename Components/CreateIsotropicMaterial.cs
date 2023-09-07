@@ -14,7 +14,7 @@ namespace ShapeGrammar.Components
         public CreateIsotropicMaterial()
           : base("CreateIsotropicMaterial", "material",
               "CreateIsotropic Material",
-              "SimpleGrammar", "Material")
+              UT.CAT, UT.GR_MAT)
         {
         }
 
@@ -80,7 +80,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.icons_Generic;
             }
         }
 

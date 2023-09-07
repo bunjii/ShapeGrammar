@@ -14,7 +14,7 @@ namespace ShapeGrammar.Components
         public RuleA()
           : base("RuleA", "rulea",
               "Change the state of the system to gamma",
-              "SimpleGrammar", "Rules")
+              UT.CAT, UT.GR_RLS)
         {
         }
 
@@ -59,7 +59,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.icons_Generic;
             }
         }
 

@@ -15,7 +15,7 @@ namespace ShapeGrammar.Components
         public LineToElement()
           : base("LineToElement", "lnToEl",
               "Creates a SH_Element from a Line",
-              "SimpleGrammar", "Element")
+              UT.CAT, UT.GR_ELM)
         {
         }
 
@@ -76,7 +76,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return ShapeGrammar.Properties.Resources.icons_C_Elem1D;
+                return Properties.Resources.icons_Generic;
             }
         }
 

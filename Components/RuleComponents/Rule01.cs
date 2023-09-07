@@ -16,7 +16,7 @@ namespace ShapeGrammar.Components
         public Rule01()
           : base("Rule01", "Nickname",
               "Description",
-              "SimpleGrammar", "Rules")
+              UT.CAT, UT.GR_RLS)
         {
         }
 
@@ -69,7 +69,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.icons_Generic;
             }
         }
 

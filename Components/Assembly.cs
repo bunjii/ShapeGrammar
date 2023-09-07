@@ -19,7 +19,7 @@ namespace ShapeGrammar.Components
         public Assembly()
           : base("Assembly", "Assembly",
               "Assembly",
-              "SimpleGrammar", "Assembly")
+              UT.CAT, UT.GR_ASSEM)
         {
         }
 
@@ -184,7 +184,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return ShapeGrammar.Properties.Resources.icons_C_Mdl;
+                return Properties.Resources.icons_Generic;
             }
         }
 

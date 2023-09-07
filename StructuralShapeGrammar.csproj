@@ -173,6 +173,8 @@
     <Compile Include="Components\RuleComponents\RuleA.cs" />
     <Compile Include="Components\KarambaComponents\SH_ShapeToKarambaModel.cs" />
     <Compile Include="Components\SupportComponent.cs" />
+    <Compile Include="Components\TcpReceive.cs" />
+    <Compile Include="Components\TcpSend.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -216,6 +218,7 @@
   <ItemGroup>
     <Content Include="Misc\SimpleShapeGrammar.drawio.png" />
     <Content Include="Misc\SimpleShapeGrammar.drawio.xml" />
+    <None Include="Resources\icons_Generic.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

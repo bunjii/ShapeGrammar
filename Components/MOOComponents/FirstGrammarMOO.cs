@@ -17,7 +17,7 @@ namespace ShapeGrammar.Components.MOOComponents
         public FirstGrammarMOO()
           : base("FirstGrammarMOO", "Nickname",
               "Description",
-              "SimpleGrammar", "MOO")
+               UT.CAT, UT.GR_MISC)
         {
             ObjectiveValues = new List<List<double>>();
             ObjectiveVariables = new List<List<SG_Rule>>();

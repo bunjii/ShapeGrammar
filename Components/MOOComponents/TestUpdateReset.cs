@@ -5,6 +5,8 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Special;
 using Rhino.Geometry;
 
+using ShapeGrammar.Classes;
+
 namespace ShapeGrammar.Components.MOOComponents
 {
     public class TestUpdateReset : GH_Component
@@ -15,7 +17,7 @@ namespace ShapeGrammar.Components.MOOComponents
         public TestUpdateReset()
           : base("TestUpdateReset", "Nickname",
               "Description",
-              "SimpleGrammar", "MOO")
+              UT.CAT, UT.GR_MISC)
         {
         }
 

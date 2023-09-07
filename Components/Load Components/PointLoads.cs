@@ -1,6 +1,7 @@
 ﻿using Grasshopper.Kernel;
 using Rhino.Geometry;
 using System;
+
 using ShapeGrammar.Classes;
 
 namespace ShapeGrammar.Components
@@ -13,7 +14,7 @@ namespace ShapeGrammar.Components
         public PointLoads()
           : base("PointLoads", "loads",
               "Assign Loads To the structure",
-              "SimpleGrammar", "Loads")
+              UT.CAT, UT.GR_LD)
         {
         }
 
@@ -69,7 +70,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return ShapeGrammar.Properties.Resources.icons_C_Load_P;
+                return Properties.Resources.icons_Generic;
             }
         }
 

@@ -13,7 +13,7 @@ namespace ShapeGrammar.Components
         public SupportComponent()
           : base("SupportComponent", "support",
               "Create The support for the element",
-              "SimpleGrammar", "Support")
+              UT.CAT, UT.GR_SUP)
         {
         }
 
@@ -64,7 +64,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return ShapeGrammar.Properties.Resources.icons_C_Sup;
+                return Properties.Resources.icons_Generic;
             }
         }
 

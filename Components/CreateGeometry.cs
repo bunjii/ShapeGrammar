@@ -13,7 +13,7 @@ namespace ShapeGrammar.Components
         public CreateGeometry()
           : base("CreateGeometry", "geom",
               "Create geometry from Simple Shape",
-              "SimpleGrammar", "Utility")
+              UT.CAT, UT.GR_UTIL)
         {
         }
 
@@ -67,7 +67,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return ShapeGrammar.Properties.Resources.icons_I_DrawCS;
+                return Properties.Resources.icons_Generic;
             }
         }
 

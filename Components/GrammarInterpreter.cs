@@ -15,7 +15,7 @@ namespace ShapeGrammar.Components
         public GrammarInterpreter()
           : base("GrammarInterpreter", "interpreter",
               "Description",
-              "SimpleGrammar", "Interpreter")
+              UT.CAT, UT.GR_INT)
         {
         }
 
@@ -87,7 +87,7 @@ namespace ShapeGrammar.Components
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return ShapeGrammar.Properties.Resources.icons_C_Sol_LS;
+                return Properties.Resources.icons_Generic;
             }
         }
 

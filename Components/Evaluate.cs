@@ -13,7 +13,7 @@ namespace ShapeGrammar.Components
         public Evaluate()
           : base("Evaluate", "eval",
               "Temporary component evaluating the forces",
-              "SimpleGrammar", "Utility")
+              UT.CAT, UT.GR_MISC)
         {
         }
 

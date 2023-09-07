@@ -16,7 +16,7 @@ namespace ShapeGrammar.Components.RuleComponents
         public Rule03()
           : base("Rule03", "r3",
               "Rule3 adds a funicular to the simple bridge. This is the last rule to be used",
-              "SimpleGrammar", "Rules")
+               UT.CAT, UT.GR_RLS)
         {
         }
 
@@ -67,7 +67,7 @@ namespace ShapeGrammar.Components.RuleComponents
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.icons_Generic;
             }
         }
 
