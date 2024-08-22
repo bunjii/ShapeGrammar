@@ -196,9 +196,11 @@ namespace ShapeGrammar.Classes
             var k3d = new KarambaCommon.Toolkit();
             // calculate Th.I response
 
+            // List<double> max_disp = new List<double>();
+
             try
             {
-                Model analysedModel = k3d.Algorithms.AnalyzeThI(model, out List<double> max_disp, out List<double> out_g, out List<double> out_comp, out string message);
+                Model analysedModel = k3d.Algorithms.AnalyzeThI(model, out IReadOnlyList<double> max_disp, out IReadOnlyList<double> out_g, out IReadOnlyList<double> out_comp, out string message);
                 // iterate through each objective function
                 foreach (string objective in objectives)
                 {

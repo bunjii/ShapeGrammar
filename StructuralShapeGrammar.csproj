@@ -53,29 +53,40 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GH_IO">
-      <HintPath>..\_ref\ShapeGrammar\GH_IO.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Rhino 8\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Grasshopper">
-      <HintPath>..\_ref\ShapeGrammar\Grasshopper.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Rhino 8\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="karamba.gha">
-      <HintPath>..\_ref\ShapeGrammar\karamba.gha.dll</HintPath>
+      <HintPath>..\..\..\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.40718\Karamba.gha.dll</HintPath>
     </Reference>
-    <Reference Include="karambaCommon">
-      <HintPath>..\_ref\ShapeGrammar\KarambaCommon.dll</HintPath>
+    <Reference Include="KarambaCommon">
+      <HintPath>..\..\..\AppData\Roaming\McNeel\Rhinoceros\packages\7.0\Karamba3D\3.1.40531\KarambaCommon.dll</HintPath>
     </Reference>
     <Reference Include="RhinoCommon">
-      <HintPath>..\_ref\ShapeGrammar\RhinoCommon.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files\Rhino 8\System\RhinoCommon.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -167,8 +178,7 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
-Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\7.0\Karamba3D\2.2.0.171\$(ProjectName).gha"
-Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\7.0\Karamba3D\2.2.0.171\$(ProjectName).dll"
+Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.40718\$(ProjectName).gha"
 
 Erase "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
@@ -184,13 +194,6 @@ Erase "$(TargetPath)"</PostBuildEvent>
     </DocumentationFile>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
-  <Import Project="packages\Accord.3.8.0\build\Accord.targets" Condition="Exists('packages\Accord.3.8.0\build\Accord.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Accord.3.8.0\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Accord.3.8.0\build\Accord.targets'))" />
-  </Target>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
