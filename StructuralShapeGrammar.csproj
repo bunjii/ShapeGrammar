@@ -56,6 +56,9 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GH_IO">
       <HintPath>..\..\..\..\..\Program Files\Rhino 8\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
@@ -153,6 +156,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="SimpleShapeGrammarInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -165,6 +173,11 @@
   <ItemGroup>
     <Content Include="Misc\SimpleShapeGrammar.drawio.png" />
     <Content Include="Misc\SimpleShapeGrammar.drawio.xml" />
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\icons_Generic.png" />
   </ItemGroup>
   <ItemGroup />
@@ -177,7 +190,10 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
+    <PostBuildEvent>ECHO ON
+DIR 
+
+Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
 Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.40718\$(ProjectName).gha"
 
 Erase "$(TargetPath)"</PostBuildEvent>
@@ -193,6 +209,7 @@ Erase "$(TargetPath)"</PostBuildEvent>
     <DocumentationFile>
     </DocumentationFile>
     <PlatformTarget>x64</PlatformTarget>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
