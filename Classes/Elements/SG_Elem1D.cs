@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhino.ApplicationSettings;
 using Rhino.Geometry;
 
 
@@ -19,6 +20,8 @@ namespace ShapeGrammar.Classes.Elements
         // public SH_Node[] Nodes { get; set; } 
 
         public Line Ln { get; set; }
+        public Curve Crv { get; set; }
+        public Plane EPln { get; set; }
         public SH_CrossSection_Beam CrossSection { get; set; }
 
         // --- constructors ---
@@ -32,6 +35,7 @@ namespace ShapeGrammar.Classes.Elements
             ID = _id;
             Nodes = _nodes;
             CreateLine();
+            RegisterElemPln();
         }
         public SG_Elem1D(SG_Node[] _nodes, int _id, string _el_name)
         {
@@ -39,9 +43,8 @@ namespace ShapeGrammar.Classes.Elements
             Nodes = _nodes;
             Name = _el_name;
             
-            
             CreateLine();
-
+            RegisterElemPln();
 
         }
 
@@ -57,6 +60,38 @@ namespace ShapeGrammar.Classes.Elements
             nodes[1] = new SG_Node(Ln.To, -999);
 
             Nodes = nodes;
+            RegisterElemPln();
+
+
+        }
+
+        public SG_Elem1D(Curve _crv, int _id, string _el_name, SH_CrossSection_Beam _cs)
+        {
+            ID = _id;
+            Name = _el_name;
+            Crv = _crv;
+            Ln = new Line(_crv.PointAtStart, _crv.PointAtEnd);
+            CrossSection = _cs;
+
+            SG_Node[] nodes = new SG_Node[2];
+
+            var node1 = new SG_Node(Ln.From, -999);
+            var pln = new Plane();
+            _crv.FrameAt(_crv.Domain.Min, out pln);
+            node1.NPln = pln;
+
+            var node2 = new SG_Node(Ln.To, -999);
+            var pln2 = new Plane();
+            _crv.FrameAt(_crv.Domain.Max, out pln2);
+            node2.NPln = pln2;
+
+
+            nodes[0] = node1;
+            nodes[1] = node2;
+
+            Nodes = nodes;
+            RegisterElemPln();
+
         }
 
 
@@ -66,6 +101,38 @@ namespace ShapeGrammar.Classes.Elements
         //{
         //    NurbsCurve = NurbsCurve.Create(false, 1, new Point3d[] { Nodes[0].Position, Nodes[1].Position });
         //} 
+
+        private void RegisterElemPln()
+        {
+            var spt = Nodes[0].Pt;
+            var ept = Nodes[1].Pt;
+
+            Vector3d vx = new Vector3d(ept.X - spt.X, ept.Y - spt.Y, ept.Z - spt.Z);
+
+            Vector3d vy, vz;
+            int testint = vx.IsParallelTo(Vector3d.ZAxis);
+            if (Math.Abs(vx.IsParallelTo(Vector3d.ZAxis, 0.1)) != 1)
+            {
+                // not parallel to Z-Axis
+
+                vy = Vector3d.CrossProduct(Vector3d.ZAxis, vx);
+                vz = Vector3d.CrossProduct(vx, vy);
+
+            }
+
+            else
+            {
+                // parallel to Z-Axis
+
+                vy = Vector3d.XAxis;
+                vz = Vector3d.YAxis;
+
+            }
+
+            Plane epln = new Plane(spt, vy, vz);
+            EPln = epln;
+
+        }
 
         private void CreateLine()
         {

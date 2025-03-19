@@ -48,7 +48,9 @@ namespace ShapeGrammar.Classes
 
         public static int RULE01_MARKER = -1;
         public static int RULE02_MARKER = -2;
+        public static int RULE03_MARKER = -3;
         public static int RULE04_MARKER = -4;
+        public static int RULE05_MARKER = -5;
 
         public static string CAT = "StructuralGrammar";
         public static string GR_MAT = "01. Material";

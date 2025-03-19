@@ -9,6 +9,7 @@ using Rhino;
 using Rhino.Geometry;
 using Rhino.Geometry.Intersect;
 
+using ShapeGrammar.Classes;
 using ShapeGrammar.Classes.Elements;
 
 namespace ShapeGrammar.Classes.Rules
@@ -44,14 +45,33 @@ namespace ShapeGrammar.Classes.Rules
 
             // collect R2 elements
             var selElems = ss_ref.Elems.Where(e => e.Autorule == 2);
-            
+
             // create node lists separately for above and below R0/R1 elements 
             // these should exclude the supported nodes
-            List<SG_Node> nds_side0 = selElems.Where(e => (e.Nodes[1].Pt.Z - e.Nodes[0].Pt.Z) > 0).Select(e => e.Nodes[1]).ToList();
-            List<SG_Node> nds_side1 = selElems.Where(e => (e.Nodes[1].Pt.Z - e.Nodes[0].Pt.Z) < 0).Select(e => e.Nodes[1]).ToList();
+
+            List<SG_Node> nds_side0 = new List<SG_Node>();
+            List<SG_Node> nds_side1 = new List<SG_Node>();
+
+            var elems = new List<SG_Elem1D>();
+            // added on 250220 
+            int cnt = 0;
+            foreach (var e in selElems)
+            {
+                var nd_0 = e.Nodes[0];
+                var elem = (SG_Elem1D)e;
+                var line = new Line(elem.EPln.Origin, elem.EPln.YAxis, elem.Ln.Length);
+                nds_side0.Add(new SG_Node(line.From, cnt));
+                cnt++;
+                nds_side1.Add(new SG_Node(line.To, cnt));
+                cnt++;
+            }
+
+            //List<SG_Node> nds_side0 = selElems.Where(e => (e.Nodes[1].Pt.Z - e.Nodes[0].Pt.Z) > 0).Select(e => e.Nodes[1]).ToList();
+            // List<SG_Node> nds_side1 = selElems.Where(e => (e.Nodes[1].Pt.Z - e.Nodes[0].Pt.Z) < 0).Select(e => e.Nodes[1]).ToList(); 
 
             // additioally add supported nodes to each list. 
             List<SG_Node> supNds = ss_ref.Nodes.Where(n => n.Support.SupportCondition > 0).ToList();
+
             foreach (var sn in supNds)
             {
                 var r2Elem_from_supNds = sn.Elements.Where(e => e.Autorule == 2);
@@ -62,13 +82,13 @@ namespace ShapeGrammar.Classes.Rules
                     nds_side1.Add(sn);
                 }
 
-                else 
+                else
                 // in case there is a R2 elem from the support
                 // the node should be added only in the list opposite side of the R2 member. 
                 {
                     var r2_elem = r2Elem_from_supNds.First();
 
-                    if (r2_elem.Nodes[1].Pt.Z - r2_elem.Nodes[0].Pt.Z > 0) 
+                    if (r2_elem.Nodes[1].Pt.Z - r2_elem.Nodes[0].Pt.Z > 0)
                     {
                         nds_side1.Add(sn);
                     }
@@ -82,7 +102,7 @@ namespace ShapeGrammar.Classes.Rules
             List<SG_Node> nds_side0_sorted = nds_side0.OrderBy(n => n.Pt.X).ToList();
             List<SG_Node> nds_side1_sorted = nds_side1.OrderBy(n => n.Pt.X).ToList();
 
-            for (int i = 0; i < nds_side0_sorted.Count-1; i++)
+            for (int i = 0; i < nds_side0_sorted.Count - 1; i++)
             {
                 SG_Node nd0 = nds_side0_sorted[i];
                 SG_Node nd1 = nds_side0_sorted[i + 1];
@@ -93,7 +113,7 @@ namespace ShapeGrammar.Classes.Rules
                 }
 
                 SG_Node[] nds = new SG_Node[2] { nd0, nd1 };
-                SG_Elem1D newElem = new SG_Elem1D(nds, -999, ElemName) { Autorule = 3};
+                SG_Elem1D newElem = new SG_Elem1D(nds, -999, ElemName) { Autorule = 3 };
 
                 ss_ref.AddNewElement(newElem);
             }
@@ -109,7 +129,7 @@ namespace ShapeGrammar.Classes.Rules
                 }
 
                 SG_Node[] nds = new SG_Node[2] { nd0, nd1 };
-                SG_Elem1D newElem = new SG_Elem1D(nds, -999, ElemName) { Autorule = 3};
+                SG_Elem1D newElem = new SG_Elem1D(nds, -999, ElemName) { Autorule = 3 };
 
                 ss_ref.AddNewElement(newElem);
             }
@@ -122,13 +142,13 @@ namespace ShapeGrammar.Classes.Rules
             foreach (SG_Elem1D r3e in initialR3s)
             {
                 var selNds = ss_ref.Nodes
-                    .Where(n => n.Pt.X > r3e.Nodes[0].Pt.X  && n.Pt.X  < r3e.Nodes[1].Pt.X)
+                    .Where(n => n.Pt.X > r3e.Nodes[0].Pt.X && n.Pt.X < r3e.Nodes[1].Pt.X)
                     .Where(n => n.Elements.Where(e => e.Autorule == 1).Count() != 0)
                     .OrderBy(n => n.Pt.X)
                     .ToList();
 
                 var lastNode = new SG_Node();
-                for (var i=0; i< selNds.Count();i++)
+                for (var i = 0; i < selNds.Count(); i++)
                 {
                     var nd = selNds[i];
 
@@ -157,7 +177,7 @@ namespace ShapeGrammar.Classes.Rules
                         left_nd = r3e.Nodes[0];
                         bl_left = true;
                     }
-                    else if (i == selNds.Count() -1)
+                    else if (i == selNds.Count() - 1)
                     {
                         left_nd = lastNode;
                         right_nd = r3e.Nodes[1];
@@ -198,7 +218,7 @@ namespace ShapeGrammar.Classes.Rules
                 {
                     removeIds.Add(r3e.ID);
                 }
-                
+
             }
 
             ss_ref.Elems = ss_ref.Elems.Where(e => removeIds.Contains(e.ID) == false).ToList();

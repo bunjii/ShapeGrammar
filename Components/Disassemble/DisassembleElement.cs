@@ -39,6 +39,7 @@ namespace ShapeGrammar.Components
             pManager.AddLineParameter("Line", "Ln", "Line", GH_ParamAccess.item);
             pManager.AddGenericParameter("SG_Nodes", "SG_Ns", "", GH_ParamAccess.list);
             pManager.AddGenericParameter("SG_CroSec", "SG_S", "", GH_ParamAccess.item);
+            pManager.AddPlaneParameter("EPln", "EPln", "", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -55,12 +56,16 @@ namespace ShapeGrammar.Components
 
             // --- solve ---
 
+            // var line = new Line(elem.EPln.Origin, elem.EPln.YAxis, elem.Ln.Length);
+
             // --- output ---
             DA.SetData(0, elem.ID);
             DA.SetData(1, elem.Name);
             DA.SetData(2, elem.Ln);
+            // DA.SetData(2, line);
             DA.SetDataList(3, elem.Nodes);
             DA.SetData(4, elem.CrossSection);
+            DA.SetData(5, elem.EPln);
         }
 
         /// <summary>

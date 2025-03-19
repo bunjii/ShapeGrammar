@@ -15,6 +15,9 @@ namespace ShapeGrammar.Classes
         public SG_Support Support { get; set; }
         public List<SG_Element> Elements { get; set; } = new List<SG_Element>();
 
+        /// 250318
+        public Plane NPln { get; set; }
+
         // --- constructors --- 
         public SG_Node()
         {
@@ -43,6 +46,9 @@ namespace ShapeGrammar.Classes
         }*/
         public static SG_Node CreateNode(SG_Element _e, double _t, int _id)
         {
+            //var e = (SG_Elem1D)_e;
+            //var pt = e.Crv.PointAt(e.Crv.Domain.ParameterAt(_t));
+
             double mx = (1 - _t) * _e.Nodes[0].Pt.X + _t * _e.Nodes[1].Pt.X;
             double my = (1 - _t) * _e.Nodes[0].Pt.Y + _t * _e.Nodes[1].Pt.Y;
             double mz = (1 - _t) * _e.Nodes[0].Pt.Z + _t * _e.Nodes[1].Pt.Z;
@@ -52,6 +58,26 @@ namespace ShapeGrammar.Classes
 
             return nd;
         }
+
+        public static SG_Node CreateNodeOnCrv(SG_Element _e, double _t, int _id)
+        {
+            var e = (SG_Elem1D)_e;
+            var pt = e.Crv.PointAt(e.Crv.Domain.ParameterAt(_t));
+            var pl = new Plane(); 
+            e.Crv.FrameAt(e.Crv.Domain.ParameterAt(_t), out pl);
+            
+            //double mx = (1 - _t) * _e.Nodes[0].Pt.X + _t * _e.Nodes[1].Pt.X;
+            //double my = (1 - _t) * _e.Nodes[0].Pt.Y + _t * _e.Nodes[1].Pt.Y;
+            //double mz = (1 - _t) * _e.Nodes[0].Pt.Z + _t * _e.Nodes[1].Pt.Z;
+            // Point3d newPoint = new Point3d(pt);
+
+            SG_Node nd = new SG_Node(pt, _id);
+            nd.NPln = pl;
+            nd.Elements.Add(e);
+
+            return nd;
+        }
+
 
     }
 }
