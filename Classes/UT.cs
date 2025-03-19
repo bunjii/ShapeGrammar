@@ -14,7 +14,7 @@ using Karamba.Models;
 using Karamba.Utilities;
 using Karamba.Elements;
 using Karamba.Geometry;
-using Karamba.GHopper.Geometry;
+//using Karamba.GHopper.Geometry;
 using Karamba.CrossSections;
 using Karamba.Supports;
 using Karamba.Loads;
