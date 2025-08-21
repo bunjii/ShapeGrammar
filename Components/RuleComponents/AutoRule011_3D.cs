@@ -9,14 +9,14 @@ using ShapeGrammar.Classes.Rules;
 
 namespace ShapeGrammar.Components.RuleComponents
 {
-    public class AutoRule040_3D : GH_Component
+    public class AutoRule011_3D : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the AutoRule04 class.
+        /// Initializes a new instance of the AutoRule01 class.
         /// </summary>
-        public AutoRule040_3D()
-          : base("Auto Rule 04-3D", "A-Rule04-3D",
-              "",
+        public AutoRule011_3D()
+          : base("Auto rule 011-3D", "A-Rule011-3D",
+              "Determines number of studs at each node",
               UT.CAT, UT.GR_RLS)
         {
         }
@@ -26,11 +26,8 @@ namespace ShapeGrammar.Components.RuleComponents
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddTextParameter("Elem Name", "eName", "element name", GH_ParamAccess.item);
-            pManager.AddIntegerParameter("Rule option", "O", "options: 1 to the left, 2 to the right, 3 for both", GH_ParamAccess.list);
-
-
-
+            pManager.AddTextParameter("Elem Name", "eName", "element name", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Domain", "Domain", "", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -48,21 +45,21 @@ namespace ShapeGrammar.Components.RuleComponents
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             // --- variables ---
-            string eName = "";
-            int option = -999;
-            List<int> domain = new List<int>();
+            List<string> eNames = new List<string>();
+            List<double> domain = new List<double>();
 
             // --- input ---
-            if (!DA.GetData(0, ref eName)) return;
-            // if (!DA.GetData(1, ref option)) return;
+            if (!DA.GetDataList(0, eNames)) return;
             if (!DA.GetDataList(1, domain)) return;
+
 
             // --- solve ---
 
-            SG_AutoRule040_3D ar4 = new SG_AutoRule040_3D(eName, domain.ToArray());
+            SG_AutoRule011_3D ar11 = new SG_AutoRule011_3D(eNames, domain.ToArray());
 
             // --- output ---
-            DA.SetData(0, ar4);
+            DA.SetData(0, ar11);
+
         }
 
         /// <summary>
@@ -83,7 +80,7 @@ namespace ShapeGrammar.Components.RuleComponents
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("bb235e25-254a-4dfe-9581-ed24feff118c"); }
+            get { return new Guid("9080ECB7-9C2B-4A34-9E8D-5EA714AB4873"); }
         }
     }
 }

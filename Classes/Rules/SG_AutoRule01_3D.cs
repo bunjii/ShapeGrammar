@@ -60,11 +60,11 @@ namespace ShapeGrammar.Classes.Rules
             List<int> selectedIntGenes;
             List<double> selectedDGenes;
 
-            gt.FindRange(ref sid, ref eid, UT.RULE01_MARKER);
+            gt.FindRange(ref sid, ref eid, UT.RULE010_MARKER);
 
             if (sid == -999 || eid == -999)
             {
-                return "Autorule01_3D - wrong marker";
+                return "Autorule010_3D - wrong marker";
             }
 
             // extract relevant genes
@@ -112,8 +112,8 @@ namespace ShapeGrammar.Classes.Rules
                 ss_ref.nodeCount++;
 
                 // create 2x Element
-                SG_Elem1D newCrv0 = new SG_Elem1D(elem.Crv.Split(i1.ParameterAt(param))[0], ss_ref.elementCount, elem.Name, elem.CrossSection) { Autorule = 1 };
-                SG_Elem1D newCrv1 = new SG_Elem1D(elem.Crv.Split(i1.ParameterAt(param))[1], ss_ref.elementCount+1, elem.Name, elem.CrossSection) { Autorule = 1 };
+                SG_Elem1D newCrv0 = new SG_Elem1D(elem.Crv.Split(i1.ParameterAt(param))[0], ss_ref.elementCount, elem.Name, elem.CrossSection) { Autorule = UT.RULE010_MARKER };
+                SG_Elem1D newCrv1 = new SG_Elem1D(elem.Crv.Split(i1.ParameterAt(param))[1], ss_ref.elementCount+1, elem.Name, elem.CrossSection) { Autorule = UT.RULE010_MARKER };
 
                 //SG_Elem1D newLn0 = new SG_Elem1D(new SG_Node[] { elem.Nodes[0], midNode }, ss_ref.elementCount, elem.Name) { Autorule = 1 };
                 //SG_Elem1D newLn1 = new SG_Elem1D(new SG_Node[] { midNode, elem.Nodes[1] }, ss_ref.elementCount + 1, elem.Name) { Autorule = 1 };

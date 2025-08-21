@@ -18,6 +18,9 @@ namespace ShapeGrammar.Classes
         /// 250318
         public Plane NPln { get; set; }
 
+        // 250414
+        public int NumStuds { get; set; }    
+
         // --- constructors --- 
         public SG_Node()
         {
@@ -26,6 +29,7 @@ namespace ShapeGrammar.Classes
         {
             ID = _id;
             Pt = _location;
+            NumStuds = 1;
 
             Support = new SG_Support("000000", Pt)
             {

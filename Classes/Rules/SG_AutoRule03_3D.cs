@@ -58,11 +58,11 @@ namespace ShapeGrammar.Classes.Rules
             List<int> selectedIntGenes;
             List<double> selectedDGenes;
 
-            gt.FindRange(ref sid, ref eid, UT.RULE03_MARKER);
+            gt.FindRange(ref sid, ref eid, UT.RULE030_MARKER);
 
             if (sid == -999 || eid == -999)
             {
-                return "Autorule01 - wrong marker";
+                return "Autorule03 - wrong marker";
             }
 
             // extract relevant genes
@@ -94,6 +94,8 @@ namespace ShapeGrammar.Classes.Rules
                 elem.Ln = new Line(epln.Origin, epln.ZAxis, elem.Ln.Length);
 
                 elem.Nodes[1].Pt = elem.Ln.To;
+
+                // elem.Name = "3DAR3";
 
             }
 

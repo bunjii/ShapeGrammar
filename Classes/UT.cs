@@ -46,11 +46,14 @@ namespace ShapeGrammar.Classes
 
         public static int RULE_END_MARKER = -999;
 
-        public static int RULE01_MARKER = -1;
-        public static int RULE02_MARKER = -2;
-        public static int RULE03_MARKER = -3;
-        public static int RULE04_MARKER = -4;
-        public static int RULE05_MARKER = -5;
+        public static int RULE010_MARKER = -10;
+        public static int RULE011_MARKER = -11;
+        public static int RULE020_MARKER = -20;
+        public static int RULE030_MARKER = -30;
+        public static int RULE040_MARKER = -40;
+        public static int RULE041_MARKER = -41;
+        public static int RULE050_MARKER = -50;
+        public static int RULE060_MARKER = -60;
 
         public static string CAT = "StructuralGrammar";
         public static string GR_MAT = "01. Material";

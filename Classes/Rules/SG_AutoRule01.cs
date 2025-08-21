@@ -60,7 +60,7 @@ namespace ShapeGrammar.Classes.Rules
             List<int> selectedIntGenes;
             List<double> selectedDGenes;
 
-            gt.FindRange(ref sid, ref eid, UT.RULE01_MARKER);
+            gt.FindRange(ref sid, ref eid, UT.RULE010_MARKER);
 
             if (sid == -999 || eid == -999)
             {

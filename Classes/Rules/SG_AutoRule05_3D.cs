@@ -53,7 +53,7 @@ namespace ShapeGrammar.Classes.Rules
             List<int> selectedIntGenes;
             List<double> selectedDGenes;
 
-            gt.FindRange(ref sid, ref eid, UT.RULE05_MARKER);
+            gt.FindRange(ref sid, ref eid, UT.RULE050_MARKER);
 
             if (sid == -999 || eid == -999)
             {
@@ -110,23 +110,36 @@ namespace ShapeGrammar.Classes.Rules
                     leftElemPt = closestElms[1].Nodes[1].Pt;
                     
                     line = new Line(tip, rightElemPt);
-                    SG_Elem1D newElemR = new SG_Elem1D(line, -999, "3DAR5", new SH_CrossSection_Beam()) { Autorule = 5 };
+                    SG_Elem1D newElemR = new SG_Elem1D(line, -999, "3DAR5", new SH_CrossSection_Beam()) { Autorule = UT.RULE050_MARKER };
                     
                     line = new Line(tip, leftElemPt);
-                    SG_Elem1D newElemL = new SG_Elem1D(line, -999, "3DAR5", new SH_CrossSection_Beam()) { Autorule = 5 };
+                    SG_Elem1D newElemL = new SG_Elem1D(line, -999, "3DAR5", new SH_CrossSection_Beam()) { Autorule = UT.RULE050_MARKER };
 
                     if (optionNumber == 2)
                     {
-                        ss_ref.AddNewElement(newElemL);
+                        if (newElemL.Ln.Length > UT.PRES)
+                        {
+                            ss_ref.AddNewElement(newElemL);
+                        }
+                        
                     }
                     else if (optionNumber == 1)
                     {
-                        ss_ref.AddNewElement(newElemR);
+                        if (newElemR.Ln.Length > UT.PRES)
+                        {
+                            ss_ref.AddNewElement(newElemR);
+                        }
                     }
                     else if (optionNumber == 3)
                     {
-                        ss_ref.AddNewElement(newElemR);
-                        ss_ref.AddNewElement(newElemL);
+                        if (newElemL.Ln.Length > UT.PRES)
+                        {
+                            ss_ref.AddNewElement(newElemL);
+                        }
+                        if (newElemR.Ln.Length > UT.PRES)
+                        {
+                            ss_ref.AddNewElement(newElemR);
+                        }
                     }
                     
                     

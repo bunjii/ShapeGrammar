@@ -14,7 +14,7 @@ using ShapeGrammar.Classes.Elements;
 namespace ShapeGrammar.Classes.Rules
 {
     [Serializable]
-    public class SG_AutoRule04_3D : SG_Rule
+    public class SG_AutoRule040_3D : SG_Rule
     {
 
         // --- properties ---
@@ -23,11 +23,11 @@ namespace ShapeGrammar.Classes.Rules
         public int[] Domain { get; set; }
 
         // --- constructors ---
-        public SG_AutoRule04_3D()
+        public SG_AutoRule040_3D()
         {
         }
 
-        public SG_AutoRule04_3D(string _eName, int[] _domain)
+        public SG_AutoRule040_3D(string _eName, int[] _domain)
         {
             RuleState = State.alpha;
             Name = "SG_AutoRule04-3D";
@@ -53,7 +53,7 @@ namespace ShapeGrammar.Classes.Rules
             List<int> selectedIntGenes;
             List<double> selectedDGenes;
 
-            gt.FindRange(ref sid, ref eid, UT.RULE04_MARKER);
+            gt.FindRange(ref sid, ref eid, UT.RULE040_MARKER);
 
             if (sid == -999 || eid == -999)
             {
@@ -76,12 +76,11 @@ namespace ShapeGrammar.Classes.Rules
 
             }
 
-            // var re = relevantElems[1];
-            // relevantElems.RemoveAt(1);
-            // relevantElems.Add(re); 
+            // rule no 41 
+
 
             var initialNodes = new List<SG_Node>();
-            var initialElems = ss_ref.Elems.Where(e => e.Autorule == 1).ToList();
+            var initialElems = ss_ref.Elems.Where(e => e.Autorule == UT.RULE010_MARKER).ToList();
 
             for (int i=0; i < selectedIntGenes.Count; i++)
             {

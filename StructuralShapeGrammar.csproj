@@ -101,14 +101,17 @@
     <Compile Include="Classes\Elements\SG_Elem1D.cs" />
     <Compile Include="Classes\Elements\SG_Solid.cs" />
     <Compile Include="Classes\Elements\SG_Surface.cs" />
+    <Compile Include="Classes\Rules\SG_AutoRule011_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule01_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule02.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule02_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule03.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule03_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule04.cs" />
+    <Compile Include="Classes\Rules\SG_AutoRule041_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule04_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule05_3D.cs" />
+    <Compile Include="Classes\Rules\SG_AutoRule060_3D.cs" />
     <Compile Include="Classes\SG_Genotype.cs" />
     <Compile Include="Classes\KarambaUtility.cs" />
     <Compile Include="Classes\Rules\ISH_Rule.cs" />
@@ -146,6 +149,7 @@
     <Compile Include="Components\CreateGeometry.cs" />
     <Compile Include="Components\GrammarInterpreter.cs" />
     <Compile Include="Components\Load Components\PointLoads.cs" />
+    <Compile Include="Components\RuleComponents\AutoRule011_3D.cs" />
     <Compile Include="Components\RuleComponents\AutoRule01.cs" />
     <Compile Include="Components\RuleComponents\AutoRule01_3D.cs" />
     <Compile Include="Components\RuleComponents\AutoRule02.cs" />
@@ -154,7 +158,9 @@
     <Compile Include="Components\RuleComponents\AutoRule03.cs" />
     <Compile Include="Components\RuleComponents\AutoRule04-3D.cs" />
     <Compile Include="Components\RuleComponents\AutoRule04.cs" />
+    <Compile Include="Components\RuleComponents\AutoRule041_3D.cs" />
     <Compile Include="Components\RuleComponents\AutoRule05_3D.cs" />
+    <Compile Include="Components\RuleComponents\AutoRule060-3D.cs" />
     <Compile Include="Components\RuleComponents\Rule01.cs" />
     <Compile Include="Components\RuleComponents\Rule02.cs" />
     <Compile Include="Components\RuleComponents\Rule03.cs" />
@@ -205,9 +211,9 @@
 DIR 
 
 Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
-Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50129\net7.0-windows\$(ProjectName).gha"
-Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50129\net8.0-windows\$(ProjectName).gha"
-Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50129\net48\$(ProjectName).gha"
+Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50414\net7.0-windows\$(ProjectName).gha"
+Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50414\net8.0-windows\$(ProjectName).gha"
+Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50414\net48\$(ProjectName).gha"
 
 Erase "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>

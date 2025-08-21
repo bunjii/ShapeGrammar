@@ -9,13 +9,13 @@ using ShapeGrammar.Classes.Rules;
 
 namespace ShapeGrammar.Components.RuleComponents
 {
-    public class AutoRule040_3D : GH_Component
+    public class AutoRule060_3D : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the AutoRule04 class.
         /// </summary>
-        public AutoRule040_3D()
-          : base("Auto Rule 04-3D", "A-Rule04-3D",
+        public AutoRule060_3D()
+          : base("Auto Rule 060-3D", "A-Rule060-3D",
               "",
               UT.CAT, UT.GR_RLS)
         {
@@ -27,9 +27,7 @@ namespace ShapeGrammar.Components.RuleComponents
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Elem Name", "eName", "element name", GH_ParamAccess.item);
-            pManager.AddIntegerParameter("Rule option", "O", "options: 1 to the left, 2 to the right, 3 for both", GH_ParamAccess.list);
-
-
+            // pManager.AddIntegerParameter("Rule option", "O", "options: 1 to the left, 2 to the right, 3 for both", GH_ParamAccess.list);
 
         }
 
@@ -49,20 +47,19 @@ namespace ShapeGrammar.Components.RuleComponents
         {
             // --- variables ---
             string eName = "";
-            int option = -999;
             List<int> domain = new List<int>();
 
             // --- input ---
             if (!DA.GetData(0, ref eName)) return;
-            // if (!DA.GetData(1, ref option)) return;
             if (!DA.GetDataList(1, domain)) return;
 
             // --- solve ---
 
-            SG_AutoRule040_3D ar4 = new SG_AutoRule040_3D(eName, domain.ToArray());
+            //SG_AutoRule05_3D ar5 = new SG_AutoRule05_3D(eName, domain.ToArray());
+            SG_AutoRule060_3D ar60 = new SG_AutoRule060_3D(eName, domain.ToArray());
 
             // --- output ---
-            DA.SetData(0, ar4);
+            DA.SetData(0, ar60);
         }
 
         /// <summary>
@@ -83,7 +80,7 @@ namespace ShapeGrammar.Components.RuleComponents
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("bb235e25-254a-4dfe-9581-ed24feff118c"); }
+            get { return new Guid("F57FF9BF-E6CB-478F-80FA-15D5290E66A5"); }
         }
     }
 }
