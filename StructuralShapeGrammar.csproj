@@ -69,10 +69,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="karamba.gha">
-      <HintPath>..\..\..\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.40718\Karamba.gha.dll</HintPath>
+      <HintPath>..\..\..\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50730\Karamba.gha.dll</HintPath>
     </Reference>
     <Reference Include="KarambaCommon">
-      <HintPath>..\..\..\AppData\Roaming\McNeel\Rhinoceros\packages\7.0\Karamba3D\3.1.40531\KarambaCommon.dll</HintPath>
+      <HintPath>..\..\..\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50730\KarambaCommon.dll</HintPath>
     </Reference>
     <Reference Include="RhinoCommon">
       <HintPath>..\..\..\..\..\Program Files\Rhino 8\System\RhinoCommon.dll</HintPath>
@@ -106,12 +106,15 @@
     <Compile Include="Classes\Rules\SG_AutoRule02.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule02_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule03.cs" />
+    <Compile Include="Classes\Rules\SG_AutoRule031_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule03_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule04.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule041_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule04_3D.cs" />
+    <Compile Include="Classes\Rules\SG_AutoRule051_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule05_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule060_3D.cs" />
+    <Compile Include="Classes\Rules\SG_AutoRule061_3D.cs" />
     <Compile Include="Classes\SG_Genotype.cs" />
     <Compile Include="Classes\KarambaUtility.cs" />
     <Compile Include="Classes\Rules\ISH_Rule.cs" />
@@ -159,8 +162,11 @@
     <Compile Include="Components\RuleComponents\AutoRule04-3D.cs" />
     <Compile Include="Components\RuleComponents\AutoRule04.cs" />
     <Compile Include="Components\RuleComponents\AutoRule041_3D.cs" />
+    <Compile Include="Components\RuleComponents\AutoRule051_3D.cs" />
     <Compile Include="Components\RuleComponents\AutoRule05_3D.cs" />
     <Compile Include="Components\RuleComponents\AutoRule060-3D.cs" />
+    <Compile Include="Components\RuleComponents\AutoRule031-3D.cs" />
+    <Compile Include="Components\RuleComponents\AutoRule061-3D.cs" />
     <Compile Include="Components\RuleComponents\Rule01.cs" />
     <Compile Include="Components\RuleComponents\Rule02.cs" />
     <Compile Include="Components\RuleComponents\Rule03.cs" />
@@ -211,9 +217,7 @@
 DIR 
 
 Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
-Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50414\net7.0-windows\$(ProjectName).gha"
-Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50414\net8.0-windows\$(ProjectName).gha"
-Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50414\net48\$(ProjectName).gha"
+Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50925\$(ProjectName).gha"
 
 Erase "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>

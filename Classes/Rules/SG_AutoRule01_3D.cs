@@ -112,13 +112,18 @@ namespace ShapeGrammar.Classes.Rules
                 ss_ref.nodeCount++;
 
                 // create 2x Element
-                SG_Elem1D newCrv0 = new SG_Elem1D(elem.Crv.Split(i1.ParameterAt(param))[0], ss_ref.elementCount, elem.Name, elem.CrossSection) { Autorule = UT.RULE010_MARKER };
-                SG_Elem1D newCrv1 = new SG_Elem1D(elem.Crv.Split(i1.ParameterAt(param))[1], ss_ref.elementCount+1, elem.Name, elem.CrossSection) { Autorule = UT.RULE010_MARKER };
+                SG_Elem1D newCrv0 = new SG_Elem1D(new SG_Node[2] { elem.Nodes[0], midNode }, elem.Crv.Split(i1.ParameterAt(param))[0], elem.Init_Crv,  ss_ref.elementCount, elem.Name, elem.CrossSection) { Autorule = UT.RULE010_MARKER };
+                SG_Elem1D newCrv1 = new SG_Elem1D(new SG_Node[] { midNode, elem.Nodes[1] }, elem.Crv.Split(i1.ParameterAt(param))[1], elem.Init_Crv, ss_ref.elementCount+1, elem.Name, elem.CrossSection) { Autorule = UT.RULE010_MARKER };
 
                 //SG_Elem1D newLn0 = new SG_Elem1D(new SG_Node[] { elem.Nodes[0], midNode }, ss_ref.elementCount, elem.Name) { Autorule = 1 };
                 //SG_Elem1D newLn1 = new SG_Elem1D(new SG_Node[] { midNode, elem.Nodes[1] }, ss_ref.elementCount + 1, elem.Name) { Autorule = 1 };
 
                 ss_ref.elementCount += 2;
+
+                // assign element to node 250904
+
+
+                // assign node to element 250904
 
                 // remove Element just split
                 removeIds.Add(elem.ID);

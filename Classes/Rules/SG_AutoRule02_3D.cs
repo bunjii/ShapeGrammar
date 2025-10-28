@@ -87,6 +87,20 @@ namespace ShapeGrammar.Classes.Rules
                     {
                         Line ln = new Line(ss_ref.Nodes[i].Pt, ss_ref.Nodes[i].NPln.YAxis, length);
                         SG_Elem1D elem = new SG_Elem1D(ln, -999, "3DAR2", new SH_CrossSection_Beam()) { Autorule = UT.RULE020_MARKER };
+
+                        var aa = (SG_Elem1D) ss_ref.Nodes[i].Elements.Where(e => e.Autorule == UT.RULE010_MARKER).ToList()[0];
+                        elem.Init_Crv = aa.Init_Crv;
+
+                        elem.Nodes[0] = ss_ref.Nodes[i];
+                        elem.Nodes[1] = new SG_Node(ln.To, -999);
+
+                        // source of error below resolved 250904
+                        var ini_elem = (SG_Elem1D)ss_ref.Nodes[i].Elements[0];
+                        var ini_crv = ini_elem.Crv;
+
+                        elem.Crv = ini_crv; 
+
+
                         ss_ref.AddNewElement(elem);
                     }
                 }

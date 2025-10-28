@@ -9,13 +9,13 @@ using ShapeGrammar.Classes.Rules;
 
 namespace ShapeGrammar.Components.RuleComponents
 {
-    public class AutoRule060_3D : GH_Component
+    public class AutoRule061_3D : GH_Component
     {
         /// <summary>
         /// Initializes a new instance of the AutoRule04 class.
         /// </summary>
-        public AutoRule060_3D()
-          : base("Auto Rule 060-3D", "A-Rule060-3D",
+        public AutoRule061_3D()
+          : base("Auto Rule 061-3D", "A-Rule061-3D",
               "",
               UT.CAT, UT.GR_RLS)
         {
@@ -56,7 +56,7 @@ namespace ShapeGrammar.Components.RuleComponents
             // --- solve ---
 
             //SG_AutoRule05_3D ar5 = new SG_AutoRule05_3D(eName, domain.ToArray());
-            SG_AutoRule060_3D ar60 = new SG_AutoRule060_3D(eName);
+            SG_AutoRule061_3D ar60 = new SG_AutoRule061_3D(eName);
 
             // --- output ---
             DA.SetData(0, ar60);
@@ -80,7 +80,7 @@ namespace ShapeGrammar.Components.RuleComponents
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("F57FF9BF-E6CB-478F-80FA-15D5290E66A5"); }
+            get { return new Guid("7BC4F080-A5C0-47ED-B81A-70EF0142A7C5"); }
         }
     }
 }

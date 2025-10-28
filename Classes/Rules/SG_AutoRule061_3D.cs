@@ -14,7 +14,7 @@ using ShapeGrammar.Classes.Elements;
 namespace ShapeGrammar.Classes.Rules
 {
     [Serializable]
-    public class SG_AutoRule060_3D : SG_Rule
+    public class SG_AutoRule061_3D : SG_Rule
     {
 
         // --- properties ---
@@ -22,12 +22,12 @@ namespace ShapeGrammar.Classes.Rules
         public int[] Domain { get; set; }
 
         // --- constructors ---
-        public SG_AutoRule060_3D()
+        public SG_AutoRule061_3D()
         {
         }
 
         //public SG_AutoRule060_3D(string _eName, int[] _domain)
-        public SG_AutoRule060_3D(string _eName)
+        public SG_AutoRule061_3D(string _eName)
         {
             RuleState = State.alpha;
             Name = "SG_AutoRule060-3D";
@@ -52,11 +52,11 @@ namespace ShapeGrammar.Classes.Rules
             List<int> selectedIntGenes;
             List<double> selectedDGenes;
 
-            gt.FindRange(ref sid, ref eid, UT.RULE060_MARKER);
+            gt.FindRange(ref sid, ref eid, UT.RULE061_MARKER);
 
             if (sid == -999 || eid == -999)
             {
-                return "Autorule060-3D - wrong marker";
+                return "Autorule061-3D - wrong marker";
             }
 
             // extract relevant genes
@@ -95,15 +95,15 @@ namespace ShapeGrammar.Classes.Rules
                     var iniCrv1 = ((SG_Elem1D)stud1.Nodes[0].Elements.Where(e => e.Autorule == UT.RULE010_MARKER).ToList()[0]).Init_Crv;
 
                     if (iniCrv.PointAtStart.CompareTo(iniCrv1.PointAtStart) != 0) // &&
-                                                                                   //iniCrv.PointAtEnd.CompareTo(iniCrv1.PointAtEnd) == -1 &&
-                                                                                   //iniCrv.GetLength() != iniCrv1.GetLength())
+                                                                                  //iniCrv.PointAtEnd.CompareTo(iniCrv1.PointAtEnd) == -1 &&
+                                                                                  //iniCrv.GetLength() != iniCrv1.GetLength())
                     {
                         targetElements.Add(stud1);
                         RhinoApp.WriteLine("Added element as target.");
                     }
 
                     else
-                    { 
+                    {
                         RhinoApp.WriteLine("Skipped element due to orientation or length. {0}", iniCrv.PointAtStart.CompareTo(iniCrv1.PointAtStart).ToString());
                         RhinoApp.WriteLine("iniCrv.PointAtStart: {0}", iniCrv.PointAtStart.ToString());
                         RhinoApp.WriteLine("iniCrv1.PointAtStart: {0}", iniCrv1.PointAtStart.ToString());
@@ -113,16 +113,16 @@ namespace ShapeGrammar.Classes.Rules
 
                 Rhino.RhinoApp.WriteLine("numTargetElems {0}", targetElements.Count.ToString());
 
-                var targetStud = targetElements.OrderBy(t => t.Nodes[1].Pt.DistanceTo(stud0.Nodes[1].Pt)).ToList()[0];
+                var targetStud = targetElements.OrderBy(t => t.Nodes[0].Pt.DistanceTo(stud0.Nodes[0].Pt)).ToList()[0];
 
-                var newBeam = new SG_Elem1D(new Line(stud0.Nodes[1].Pt, targetStud.Nodes[1].Pt), -999, "3DAR5", new SH_CrossSection_Beam()) { Autorule = UT.RULE060_MARKER };
+                var newBeam = new SG_Elem1D(new Line(stud0.Nodes[0].Pt, targetStud.Nodes[0].Pt), -999, "3DAR5", new SH_CrossSection_Beam()) { Autorule = UT.RULE061_MARKER };
 
                 ss_ref.AddNewElement(newBeam);
 
 
             }
 
-            return "Auto-rule 060-3D successfully applied.";
+            return "Auto-rule 061-3D successfully applied.";
 
         }
         public override State GetNextState()

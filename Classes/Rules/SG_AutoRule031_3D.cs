@@ -12,7 +12,7 @@ namespace ShapeGrammar.Classes.Rules
     /// determined from the element curve frame and updates the element plane, line and node.
     /// </summary>
     [Serializable]
-    public class SG_AutoRule030_3D : SG_Rule
+    public class SG_AutoRule031_3D : SG_Rule
     {
         // --- properties ---
 
@@ -29,12 +29,12 @@ namespace ShapeGrammar.Classes.Rules
 
         // --- constructors ---
 
-        public SG_AutoRule030_3D() { }
+        public SG_AutoRule031_3D() { }
 
-        public SG_AutoRule030_3D(List<string> _eNames, double[] _domain)
+        public SG_AutoRule031_3D(List<string> _eNames, double[] _domain)
         {
             RuleState = State.alpha;
-            Name = "SH_AutoRule_03_3D";
+            Name = "SH_AutoRule_031_3D";
             ElemNames = _eNames;
             Domain = _domain;
         }
@@ -52,7 +52,7 @@ namespace ShapeGrammar.Classes.Rules
 
         /// <summary>
         /// Apply the automatic rotation rule to the shape based on the genotype.
-        /// The genotype contains a marked range (UT.RULE030_MARKER) with paired int/double genes.
+        /// The genotype contains a marked range (UT.RULE031_MARKER) with paired int/double genes.
         /// Int gene != 0 => apply rotation for corresponding element index.
         /// Double gene => normalized rotation factor in [0,1] used to compute angle within Domain.
         /// </summary>
@@ -60,16 +60,16 @@ namespace ShapeGrammar.Classes.Rules
         {
             // Validate domain
             if (Domain == null || Domain.Length < 2)
-                return "AutoRule03-3D - invalid Domain";
+                return "AutoRule031-3D - invalid Domain";
 
             // find relevant range in genotype using the rule marker
             int sid = -999;
             int eid = -999;
-            gt.FindRange(ref sid, ref eid, UT.RULE030_MARKER);
+            gt.FindRange(ref sid, ref eid, UT.RULE031_MARKER);
 
             if (sid == -999 || eid == -999)
             {
-                return "AutoRule03-3D - wrong marker";
+                return "AutoRule031-3D - wrong marker";
             }
 
             // extract relevant genes
@@ -95,6 +95,10 @@ namespace ShapeGrammar.Classes.Rules
                 if (elem == null)
                     continue;
 
+                var iniElem = elem.Nodes[0].Elements.Where(e => e.Autorule == UT.RULE010_MARKER).ToList()[0] as SG_Elem1D;
+
+                
+
                 // compute rotation angle from D-gene and domain
                 double rotationAngle = selectedDGenes[i] * range + Domain[0];
 
@@ -106,9 +110,13 @@ namespace ShapeGrammar.Classes.Rules
                 double t;
                 elem.Crv.ClosestPoint(startPt, out t);
 
+
+                
+
                 // obtain a perpendicular frame (target plane) at parameter t on the curve
                 Plane targetPln;
-                bool gotFrame = elem.Crv.PerpendicularFrameAt(t, out targetPln);
+                bool gotFrame = iniElem.Crv.PerpendicularFrameAt(t, out targetPln);
+                // bool gotFrame = elem.Crv.PerpendicularFrameAt(t, out targetPln);
 
                 // Fallback: if frame couldn't be computed, use element's existing plane
                 if (!gotFrame)
@@ -116,8 +124,8 @@ namespace ShapeGrammar.Classes.Rules
                     targetPln = epln;
                 }
 
-                // choose rotation axis: use target frame Y axis (preserves original author's change)
-                Vector3d rotationAxis = targetPln.YAxis;
+                // choose rotation axis: use target frame Z axis (preserves original author's change)
+                Vector3d rotationAxis = targetPln.ZAxis;
 
                 // rotate the element plane around the chosen axis by the computed angle (radians)
                 epln.Rotate(rotationAngle, rotationAxis);
@@ -136,7 +144,7 @@ namespace ShapeGrammar.Classes.Rules
                 // (Optional) keep element name unchanged; original code commented out changing it to "3DAR3"
             }
 
-            return "Auto-rule 03-3D successfully applied.";
+            return "Auto-rule 031-3D successfully applied.";
         }
 
 
