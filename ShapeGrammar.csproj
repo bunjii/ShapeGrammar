@@ -1,0 +1,16 @@
+<PropertyGroup>
+  <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+  <LangVersion>latest</LangVersion>
+  <PlatformTarget>x64</PlatformTarget>
+</PropertyGroup>
+
+<ItemGroup>
+  <Reference Include="RhinoCommon">
+    <HintPath>C:\Program Files\Rhino 8\System\RhinoCommon.dll</HintPath>
+    <Private>false</Private>
+  </Reference>
+  <Reference Include="Grasshopper">
+    <HintPath>C:\Program Files\Rhino 8\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
+    <Private>false</Private>
+  </Reference>
+</ItemGroup>

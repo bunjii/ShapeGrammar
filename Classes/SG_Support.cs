@@ -58,5 +58,16 @@ namespace ShapeGrammar.Classes
             return condition;            
         }
 
+        public List<bool> GetBoolConditions()
+        {
+            var boolConditions = new List<bool>(6);
+            uint cond = (uint)SupportCondition;
+            for (int i = 0; i < 6; i++)
+            {
+                boolConditions.Add(((cond >> i) & 1u) != 0u);
+            }
+            return boolConditions;
+        }
+
     }
 }

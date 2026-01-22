@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ShapeGrammar.Classes
 {
     [Serializable]
-    public class SH_Load
+    public class SG_Load
     {
         // --- properties ---
         

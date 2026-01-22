@@ -31,6 +31,7 @@ namespace ShapeGrammar.Classes.Rules
             RuleState = State.alpha;
             Name = "SH_AutoRule_03";
             ElemName = _eName;
+            RuleMarker = UT.RULE030_MARKER;
         }
 
         // --- methods ---

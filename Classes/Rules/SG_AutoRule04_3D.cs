@@ -34,7 +34,8 @@ namespace ShapeGrammar.Classes.Rules
             ElemName = _eName;
             //Option = _opt;
             Domain = _domain;
-            
+            RuleMarker = UT.RULE040_MARKER;
+
         }
 
         // --- methods ---

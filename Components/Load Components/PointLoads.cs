@@ -53,7 +53,7 @@ namespace ShapeGrammar.Components
             DA.GetData(1, ref moments);
 
             // --- solve ---
-            SH_PointLoad load = new SH_PointLoad(forces, moments, position);
+            SG_PointLoad load = new SG_PointLoad(forces, moments, position);
 
 
 

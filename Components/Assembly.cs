@@ -55,7 +55,7 @@ namespace ShapeGrammar.Components
             // --- variables ---
             List<SG_Element> elems = new List<SG_Element>();
             List<SG_Support> sups = new List<SG_Support>();
-            List<SH_Load> loads = new List<SH_Load>();
+            List<SG_Load> loads = new List<SG_Load>();
             
 
             // --- input ---
@@ -132,7 +132,7 @@ namespace ShapeGrammar.Components
             }
             
             // add the loads to the simple shape            
-            SortLoads(loads, out List<SH_LineLoad> l_loads, out List<SH_PointLoad> p_loads);
+            SortLoads(loads, out List<SG_LineLoad> l_loads, out List<SG_PointLoad> p_loads);
 
             shape.Nodes = nodes;
             shape.Elems = renumberedElems;
@@ -152,20 +152,20 @@ namespace ShapeGrammar.Components
         /// 
 
 
-        private void SortLoads(List<SH_Load> loads ,out List<SH_LineLoad> line_loads, out List<SH_PointLoad> point_loads)
+        private void SortLoads(List<SG_Load> loads ,out List<SG_LineLoad> line_loads, out List<SG_PointLoad> point_loads)
         {
             // create the empty list
-            List<SH_PointLoad> pl = new List<SH_PointLoad>();
-            List<SH_LineLoad> ll = new List<SH_LineLoad>();
+            List<SG_PointLoad> pl = new List<SG_PointLoad>();
+            List<SG_LineLoad> ll = new List<SG_LineLoad>();
 
             // iterate through all the loads
             foreach (var l in loads)
             {
-                if (l is SH_LineLoad load)
+                if (l is SG_LineLoad load)
                 {
                     ll.Add( load);
                 }
-                if (l is SH_PointLoad ptload)
+                if (l is SG_PointLoad ptload)
                 {
                     pl.Add( ptload);
                 }

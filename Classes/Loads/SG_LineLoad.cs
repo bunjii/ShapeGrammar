@@ -5,7 +5,7 @@ using Rhino.Geometry;
 namespace ShapeGrammar.Classes
 {
     [Serializable]
-    public class SH_LineLoad : SH_Load
+    public class SG_LineLoad : SG_Load
     {
         // --- properties ---
         public string ElementId{ get; set; }
@@ -13,12 +13,12 @@ namespace ShapeGrammar.Classes
         public Vector3d Load { get; set; }
 
         // --- constructors ---
-        public SH_LineLoad()
+        public SG_LineLoad()
         {
             // empty
         }
 
-        public SH_LineLoad(int _loadCase, Vector3d _loaddirection)
+        public SG_LineLoad(int _loadCase, Vector3d _loaddirection)
         {
             LoadCase = _loadCase;
             Load = _loaddirection;

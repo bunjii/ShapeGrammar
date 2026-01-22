@@ -34,6 +34,8 @@ namespace ShapeGrammar.Classes.Rules
             ElemName = _eName;
             // Domain = _domain;
 
+            RuleMarker = UT.RULE060_MARKER;
+
         }
 
         // --- methods ---
@@ -63,8 +65,6 @@ namespace ShapeGrammar.Classes.Rules
             selectedIntGenes = gt.IntGenes.GetRange(sid, eid - sid);
             selectedDGenes = gt.DGenes.GetRange(sid, eid - sid);
 
-            // double range = Domain[1] - Domain[0];
-
             var studElements = new List<SG_Element>();
             for (int i = 0; i < ss_ref.Elems.Count; i++)
             {
@@ -77,12 +77,18 @@ namespace ShapeGrammar.Classes.Rules
             RhinoApp.WriteLine("Total Stud Elements {0}", studElements.Count.ToString());
 
             var initialElems = new List<SG_Element>();
-            if (studElements != null || studElements.Count() != 0)
+            if (studElements != null && studElements.Count != 0)
             {
                 initialElems = ss_ref.Elems.Where(e => e.Autorule == UT.RULE010_MARKER).ToList();
             }
 
-            for (int i = 0; i < selectedIntGenes.Count; i++)
+            int pairCount = Math.Min(selectedIntGenes.Count, studElements.Count);
+            if (pairCount == 0)
+            {
+                return "Autorule060-3D - no stud elements available";
+            }
+
+            for (int i = 0; i < pairCount; i++)
             {
                 var stud0 = (SG_Elem1D)studElements[i];
 
@@ -94,36 +100,35 @@ namespace ShapeGrammar.Classes.Rules
                     var stud1 = (SG_Elem1D)studElements[j];
                     var iniCrv1 = ((SG_Elem1D)stud1.Nodes[0].Elements.Where(e => e.Autorule == UT.RULE010_MARKER).ToList()[0]).Init_Crv;
 
-                    if (iniCrv.PointAtStart.CompareTo(iniCrv1.PointAtStart) != 0) // &&
-                                                                                   //iniCrv.PointAtEnd.CompareTo(iniCrv1.PointAtEnd) == -1 &&
-                                                                                   //iniCrv.GetLength() != iniCrv1.GetLength())
+                    if (iniCrv.PointAtStart.CompareTo(iniCrv1.PointAtStart) != 0)
                     {
                         targetElements.Add(stud1);
                         RhinoApp.WriteLine("Added element as target.");
                     }
-
                     else
-                    { 
+                    {
                         RhinoApp.WriteLine("Skipped element due to orientation or length. {0}", iniCrv.PointAtStart.CompareTo(iniCrv1.PointAtStart).ToString());
                         RhinoApp.WriteLine("iniCrv.PointAtStart: {0}", iniCrv.PointAtStart.ToString());
                         RhinoApp.WriteLine("iniCrv1.PointAtStart: {0}", iniCrv1.PointAtStart.ToString());
                     }
-
                 }
 
                 Rhino.RhinoApp.WriteLine("numTargetElems {0}", targetElements.Count.ToString());
+
+                if (targetElements.Count == 0)
+                {
+                    RhinoApp.WriteLine("No target elements found for stud index {0}; skipping.", i);
+                    continue;
+                }
 
                 var targetStud = targetElements.OrderBy(t => t.Nodes[1].Pt.DistanceTo(stud0.Nodes[1].Pt)).ToList()[0];
 
                 var newBeam = new SG_Elem1D(new Line(stud0.Nodes[1].Pt, targetStud.Nodes[1].Pt), -999, "3DAR5", new SH_CrossSection_Beam()) { Autorule = UT.RULE060_MARKER };
 
                 ss_ref.AddNewElement(newBeam);
-
-
             }
 
             return "Auto-rule 060-3D successfully applied.";
-
         }
         public override State GetNextState()
         {

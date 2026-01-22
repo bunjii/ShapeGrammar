@@ -23,8 +23,8 @@ namespace ShapeGrammar.Classes
 
         public List<SG_Node> Nodes { get; set; }
         public List<SG_Support> Supports { get; set; }
-        public List<SH_LineLoad> LineLoads { get; set; }
-        public List<SH_PointLoad> PointLoads { get; set; }
+        public List<SG_LineLoad> LineLoads { get; set; }
+        public List<SG_PointLoad> PointLoads { get; set; }
         public State SimpleShapeState { get; set; }
 
         // --- constructors ---
@@ -101,16 +101,6 @@ namespace ShapeGrammar.Classes
             }
 
         }
-
-        //public void AddSurface(SH_Element _surface)
-        //{
-        //    if (!Elements.ContainsKey("Surface"))
-        //    {
-        //        Elements["Surface"] = new List<SH_Element>();
-        //    }
-            
-        //    Elements["Surface"].Add(_surface);
-        //}
 
         public List<Line> GetLinesFromShape()
         {

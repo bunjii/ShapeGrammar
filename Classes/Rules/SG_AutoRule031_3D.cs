@@ -37,6 +37,7 @@ namespace ShapeGrammar.Classes.Rules
             Name = "SH_AutoRule_031_3D";
             ElemNames = _eNames;
             Domain = _domain;
+            RuleMarker = UT.RULE031_MARKER;
         }
 
 

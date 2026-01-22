@@ -11,6 +11,7 @@ namespace ShapeGrammar.Classes.Rules
     {
         public State RuleState;
         public string Name;
+        public int RuleMarker;
 
         public SG_Rule()
         { 

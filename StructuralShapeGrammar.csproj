@@ -60,6 +60,9 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSparse, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\CSparse.4.2.0\lib\netstandard2.0\CSparse.dll</HintPath>
+    </Reference>
     <Reference Include="GH_IO">
       <HintPath>..\..\..\..\..\Program Files\Rhino 8\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
       <Private>False</Private>
@@ -81,6 +84,9 @@
     <Reference Include="System">
       <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration">
       <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Configuration.dll</HintPath>
     </Reference>
@@ -89,6 +95,16 @@
     </Reference>
     <Reference Include="System.Data">
       <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -115,16 +131,16 @@
     <Compile Include="Classes\Rules\SG_AutoRule05_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule060_3D.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule061_3D.cs" />
+    <Compile Include="Classes\SG_GA.cs" />
     <Compile Include="Classes\SG_Genotype.cs" />
-    <Compile Include="Classes\KarambaUtility.cs" />
     <Compile Include="Classes\Rules\ISH_Rule.cs" />
     <Compile Include="Classes\Rules\SG_AutoRule01.cs" />
     <Compile Include="Classes\Material\SH_Material.cs" />
     <Compile Include="Classes\Elements\SG_Element.cs" />
-    <Compile Include="Classes\Loads\SH_Load.cs" />
+    <Compile Include="Classes\Loads\SG_Load.cs" />
     <Compile Include="Classes\Material\SH_Material_Isotrop.cs" />
-    <Compile Include="Classes\Loads\SH_PointLoad.cs" />
-    <Compile Include="Classes\Loads\SH_LineLoad.cs" />
+    <Compile Include="Classes\Loads\SG_PointLoad.cs" />
+    <Compile Include="Classes\Loads\SG_LineLoad.cs" />
     <Compile Include="Classes\SG_Node.cs" />
     <Compile Include="Classes\CrossSections\SH_CrossSection_Rectangle.cs" />
     <Compile Include="Classes\Rules\SG_Rule.cs" />
@@ -134,7 +150,34 @@
     <Compile Include="Classes\Rules\SH_Rule03.cs" />
     <Compile Include="Classes\SG_Shape.cs" />
     <Compile Include="Classes\SG_Support.cs" />
+    <Compile Include="Classes\Toolbox\ST_Common.cs" />
+    <Compile Include="Classes\Toolbox\ST_Element_1D.cs" />
+    <Compile Include="Classes\Toolbox\ST_Load.cs" />
+    <Compile Include="Classes\Toolbox\ST_Material.cs" />
+    <Compile Include="Classes\Toolbox\ST_Model.cs" />
+    <Compile Include="Classes\Toolbox\ST_Node.cs" />
+    <Compile Include="Classes\Toolbox\ST_Section.cs" />
+    <Compile Include="Classes\Toolbox\ST_SolveLS.cs" />
+    <Compile Include="Classes\Toolbox\ST_Support.cs" />
     <Compile Include="Classes\UT.cs" />
+    <Compile Include="Components\CreateCustomGenotype.cs" />
+    <Compile Include="Components\ToolboxComponents\01_Material.cs" />
+    <Compile Include="Components\ToolboxComponents\02_Sections.cs" />
+    <Compile Include="Components\ToolboxComponents\03_Support.cs" />
+    <Compile Include="Components\ToolboxComponents\04_Loads.cs" />
+    <Compile Include="Components\ToolboxComponents\05_Element1D.cs" />
+    <Compile Include="Components\ToolboxComponents\05_ElementHinge.cs" />
+    <Compile Include="Components\ToolboxComponents\06_Assembly.cs" />
+    <Compile Include="Components\ToolboxComponents\07_CroSecOpt.cs" />
+    <Compile Include="Components\ToolboxComponents\07_SolveLS.cs" />
+    <Compile Include="Components\ToolboxComponents\07_SolveLS4SG.cs" />
+    <Compile Include="Components\ToolboxComponents\08_DeformedShape.cs" />
+    <Compile Include="Components\ToolboxComponents\08_Elem1DForces.cs" />
+    <Compile Include="Components\ToolboxComponents\08_Reaction.cs" />
+    <Compile Include="Components\ToolboxComponents\08_Utilisation.cs" />
+    <Compile Include="Components\ToolboxComponents\10_GeneticAlgorithm.cs" />
+    <Compile Include="Components\ToolboxComponents\98_Draw_CrossSection.cs" />
+    <Compile Include="Components\ToolboxComponents\99_Disassembles.cs" />
     <Compile Include="Components\Assembly.cs" />
     <Compile Include="Components\CreateGenotype.cs" />
     <Compile Include="Components\CreateIsotropicMaterial.cs" />
@@ -196,12 +239,46 @@
   <ItemGroup>
     <Content Include="Misc\SimpleShapeGrammar.drawio.png" />
     <Content Include="Misc\SimpleShapeGrammar.drawio.xml" />
+    <None Include="Resources\icons_C_Mdl.png" />
+    <None Include="Resources\icons_C_Mat.png" />
+    <None Include="Resources\icons_C_Load_P.png" />
+    <None Include="Resources\icons_C_ElemHinge.png" />
+    <None Include="Resources\icons_C_ElemForces.png" />
+    <None Include="Resources\icons_C_Elem1D.png" />
+    <None Include="Resources\icons_C_Def.png" />
+    <None Include="Resources\icons_P_Sup.png" />
+    <None Include="Resources\icons_P_Sec.png" />
+    <None Include="Resources\icons_P_Node.png" />
+    <None Include="Resources\icons_P_Mdl.png" />
+    <None Include="Resources\icons_P_Mat.png" />
+    <None Include="Resources\icons_P_Load_P.png" />
+    <None Include="Resources\icons_P_Elem1D.png" />
+    <None Include="Resources\icons_I_Sup.png" />
+    <None Include="Resources\icons_I_Sec.png" />
+    <None Include="Resources\icons_I_Node.png" />
+    <None Include="Resources\icons_I_Mdl.png" />
+    <None Include="Resources\icons_I_Mat.png" />
+    <None Include="Resources\icons_I_Load_P.png" />
+    <None Include="Resources\icons_I_Elem1D.png" />
+    <None Include="Resources\icons_I_DrawCS.png" />
+    <None Include="Resources\icons_C_Sup.png" />
+    <None Include="Resources\icons_C_Sol_Util.png" />
+    <None Include="Resources\icons_C_Sol_LS.png" />
+    <None Include="Resources\icons_C_Sol_CSOpt.png" />
+    <None Include="Resources\icons_C_Sec_RHS.png" />
+    <None Include="Resources\icons_C_Sec_R.png" />
+    <None Include="Resources\icons_C_Sec_I.png" />
+    <None Include="Resources\icons_C_Sec_CHS.png" />
+    <None Include="Resources\icons_C_Sec_C.png" />
+    <None Include="Resources\icons_C_Reaction.png" />
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\icons_Generic.png" />
+    <None Include="ShapeGrammar.csproj" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -217,7 +294,7 @@
 DIR 
 
 Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
-Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.50925\$(ProjectName).gha"
+Copy "$(TargetPath)" "%25UserProfile%25\AppData\Roaming\McNeel\Rhinoceros\packages\8.0\Karamba3D\3.1.51222\$(ProjectName).gha"
 
 Erase "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>

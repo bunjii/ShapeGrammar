@@ -29,6 +29,7 @@ namespace ShapeGrammar.Classes.Rules
             Name = "SH_AutoRule_02";
             ElemNames = _eNames;
             Domain = _domain;
+            RuleMarker = UT.RULE020_MARKER;
 
         }
 

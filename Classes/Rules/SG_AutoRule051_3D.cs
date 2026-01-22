@@ -21,6 +21,7 @@ namespace ShapeGrammar.Classes.Rules
         // public int Option { get; set; }
         public int[] Domain { get; set; }
 
+
         // --- constructors ---
         public SG_AutoRule051_3D()
         {
@@ -33,6 +34,8 @@ namespace ShapeGrammar.Classes.Rules
             ElemName = _eName;
             //Option = _opt;
             Domain = _domain;
+
+            RuleMarker = UT.RULE051_MARKER;
 
         }
 

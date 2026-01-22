@@ -33,6 +33,8 @@ namespace ShapeGrammar.Classes.Rules
         {
             RuleState = State.alpha;
             Name = "SG_AutoRule_01_3D";
+
+            RuleMarker = UT.RULE010_MARKER;
         }
 
         public SG_AutoRule01_3D(List<string> _eNames)
@@ -40,6 +42,8 @@ namespace ShapeGrammar.Classes.Rules
             RuleState = State.alpha;
             Name = "SG_AutoRule_01_3D";
             ElemNames = _eNames;
+
+            RuleMarker = UT.RULE010_MARKER;
 
             // T = _t;
 
