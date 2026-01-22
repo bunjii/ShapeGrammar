@@ -47,7 +47,6 @@ namespace ShapeGrammar.Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // --- variables ---
             SG_Shape iniShape = new SG_Shape();
             List<SG_Rule> rls = new List<SG_Rule>();
             SG_Genotype inigt = new SG_Genotype();
@@ -90,8 +89,6 @@ namespace ShapeGrammar.Components
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Properties.Resources.icons_Generic;
             }
         }
